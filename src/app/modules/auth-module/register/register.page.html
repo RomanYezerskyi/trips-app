@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Register</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+    <form [formGroup]="ionicForm" (ngSubmit)="submitForm()" novalidate>
+      <ion-item lines="full">
+        <ion-label position="floating">First name</ion-label>
+        <ion-input type="text"  formControlName="firstName" required="true"></ion-input>
+      </ion-item>
+      <span class="error ion-padding" *ngIf="isSubmitted && errorControl['firstName']?.errors?.['required']">
+        First name is required.
+      </span>
+      <span class="error ion-padding" *ngIf="isSubmitted && errorControl['firstName'].errors?.['minlength']">
+        First name should be min 2 chars long.
+      </span>
+      <ion-item lines="full">
+        <ion-label position="floating">Email</ion-label>
+        <ion-input type="text" formControlName="email" required="true"></ion-input>
+      </ion-item>
+      <span class="error ion-padding" *ngIf="isSubmitted && errorControl['email']?.errors?.['required']">
+        Email is required.
+      </span>
+      <span class="error ion-padding" *ngIf="isSubmitted && errorControl['email'].errors?.['email']">
+        Please enter valid email.
+      </span>
+      <ion-item lines="full">
+        <ion-label position="floating">Phone Number</ion-label>
+        <ion-input type="tel" formControlName="phoneNumber" required="true"></ion-input>
+      </ion-item>
+      <span class="error ion-padding" *ngIf="isSubmitted && errorControl['phoneNumber']?.errors?.['required']">
+        Email is required.
+      </span>
+      <span class="error ion-padding" *ngIf="isSubmitted && errorControl['phoneNumber'].errors?.['minlength']">
+         Phone Number should be 10 numbers long.
+      </span>
+      <ion-item lines="full">
+        <ion-label position="floating">Password</ion-label>
+        <ion-input type="password" formControlName="password"  required="true"></ion-input>
+      </ion-item>
+      <span class="error ion-padding" *ngIf="isSubmitted && errorControl['password']?.errors?.['required']">
+        Password is required.
+      </span>
+      <span class="error ion-padding" *ngIf="isSubmitted && errorControl['password'].errors?.['minlength']">
+        Password should be min 4 chars long.
+      </span>
+      <ion-row>
+        <ion-col>
+          <ion-button type="submit" color="danger" expand="block">Sign Up</ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+</ion-content>
