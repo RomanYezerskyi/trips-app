@@ -1,3 +1,51 @@
-<p>
-  search-form works!
-</p>
+<div class="container">
+  <form #searchForm="ngForm" class="form" (ngSubmit)="search()">
+    <app-maps-autocomplete [label]="'Enter start location here'" [place]="trip.startPlace" (locationChange)="startPlaceChanged($event)">
+    </app-maps-autocomplete>
+    <app-maps-autocomplete [label]="'Enter end location here'" [place]="trip.endPlace" (locationChange)="endPlaceChanged($event)">
+    </app-maps-autocomplete>
+
+
+    <div class="users">
+      <div class="count">
+        <ion-icon name="person" size="large" color="primary"></ion-icon>
+        <p>{{trip.countOfSeats}}</p>
+      </div>
+      <div class="range">
+        <ion-range aria-label="Range with pin" (ionChange)="onRangeChange($event)" [value]="trip.countOfSeats" [ticks]="true" step="1" min="1" max="8" [pin]="true" [pinFormatter]="pinFormatter">
+        </ion-range>
+      </div>
+    </div>
+
+    <div class="date-block">
+      <button type="button" id="open-modal-date" class="date-btn">
+        <ion-icon name="calendar"  size="large" color="primary" ></ion-icon>
+        <p>{{trip.startTime ?? dateNow | date }}</p>
+      </button>
+    </div>
+    <ion-modal trigger="open-modal-date">
+      <ng-template>
+        <ion-header>
+          <ion-toolbar>
+            <ion-buttons slot="start">
+            </ion-buttons>
+            <ion-title></ion-title>
+            <ion-buttons slot="end">
+              <ion-button (click)="confirm()" [strong]="true">Confirm</ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding modal-back">
+          <p>Selected date:  {{trip.startTime | date}}</p>
+          <ion-datetime presentation="date" (ionChange)="onDateChange($event)" class="datetime-custom">
+            <span slot="time-label">Please select start date</span>
+          </ion-datetime>
+        </ion-content>
+      </ng-template>
+    </ion-modal>
+
+    <button type="submit" class="search-btn">
+     GO
+    </button>
+  </form>
+</div>

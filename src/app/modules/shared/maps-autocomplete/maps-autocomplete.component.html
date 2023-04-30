@@ -1,0 +1,58 @@
+
+    <!-- <input matInput type="text" [matAutocomplete]="auto" [formControl]="inputFieldFormControl"
+        placeholder="Enter location here" /> -->
+
+<!--    <input matInput type="text" [(ngModel)]="place" id="place" name="place" [matAutocomplete]="auto"-->
+<!--        [formControl]="inputFieldFormControl" placeholder="Enter location here" />-->
+<!--    <mat-icon matSuffix>my_location</mat-icon>-->
+<!--    <ion-item>-->
+<!--      <ion-input type="text" [(ngModel)]="place" id="place" name="place"-->
+<!--                 [formControl]="inputFieldFormControl" placeholder="Enter location here"></ion-input>-->
+<!--    </ion-item>-->
+<!--    <ng-select *ngFor="let option of searchOptions | async" bindLabel="name"  notFoundText="No records found">-->
+<!--    </ng-select>-->
+
+
+<!--        <mat-option *ngFor="let option of searchOptions | async" [value]="option.fullAddress"-->
+<!--            (onSelectionChange)="optionSelectionChange(option, $event)" [matTooltip]="option.fullAddress"-->
+<!--            matTooltipShowDelay="1000">-->
+<!--            <span class="mat-body">{{ option.fullAddress }}</span>-->
+<!--        </mat-option>-->
+<!--        <ion-item>-->
+<!--          <ion-input type="text" [(ngModel)]="place" id="place" name="place"-->
+<!--                     [formControl]="inputFieldFormControl" placeholder="Enter location here"></ion-input>-->
+<!--        </ion-item>-->
+<div class="container">
+    <button type="button" id="open-modal+{{label}}" class="search-btn">
+      <ion-icon size="large" color="primary" name="navigate"></ion-icon> <p>{{place ?? label}}</p>
+    </button>
+</div>
+      <ion-modal trigger="open-modal+{{label}}">
+        <ng-template>
+          <ion-header>
+            <ion-toolbar>
+              <ion-buttons slot="start">
+                <ion-button (click)="cancel()">Cancel</ion-button>
+              </ion-buttons>
+              <ion-title></ion-title>
+              <ion-buttons slot="end">
+                <ion-button (click)="confirm()" [strong]="true">Confirm</ion-button>
+              </ion-buttons>
+            </ion-toolbar>
+          </ion-header>
+          <ion-content class="ion-padding modal-back">
+
+            <ion-searchbar id="place" class="custom" name="place" [(ngModel)]="place" [formControl]="inputFieldFormControl" [placeholder]="label" ></ion-searchbar>
+
+            <mat-list role="list" class="list">
+              <mat-list-item role="listitem"  class="list-item" *ngFor="let option of searchOptions | async">
+                <mat-option (onSelectionChange)="optionSelectionChange(option, $event)">
+                  <p>{{ option.fullAddress }}</p>
+                </mat-option>
+              </mat-list-item>
+            </mat-list>
+          </ion-content>
+        </ng-template>
+      </ion-modal>
+
+
