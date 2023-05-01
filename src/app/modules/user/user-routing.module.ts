@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { UserPage } from './user.page';
 import {HomeComponent} from "./home/home.component";
-import {SearchFormComponent} from "../shared/search-form/search-form.component";
+import {TripsListComponent} from "./trips-list/trips-list.component";
 
 
 const routes: Routes = [
@@ -13,11 +13,11 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: SearchFormComponent
+        component: HomeComponent
       },
       {
-        path: 'home',
-        component: HomeComponent
+        path: 'search',
+        component: TripsListComponent
       },
     ]
   },

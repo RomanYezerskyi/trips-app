@@ -20,13 +20,17 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatSelectModule} from "@angular/material/select";
 import {MatListModule} from "@angular/material/list";
 import {HomeComponent} from "./home/home.component";
+import {TripsListComponent} from "./trips-list/trips-list.component";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 
 @NgModule({
   declarations: [
     UserPage,
     SearchFormComponent,
     MapsAutocompleteComponent,
-    HomeComponent
+    HomeComponent,
+    TripsListComponent
   ],
   imports: [
     CommonModule,
@@ -43,8 +47,9 @@ import {HomeComponent} from "./home/home.component";
     MatTooltipModule,
     MatIconModule,
     MatSelectModule,
-    MatListModule
-
+    MatListModule,
+    MatProgressSpinnerModule,
+    FontAwesomeModule
   ],
 
 })

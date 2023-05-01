@@ -32,7 +32,7 @@ export class SearchFormComponent  implements OnInit {
   }
   search(): void {
     debugger;
-    this.router.navigate(['user/search'], {
+    this.router.navigate(['/user/search'], {
       queryParams: {
         startPlace: this.trip.startPlace,
         endPlace: this.trip.endPlace,
