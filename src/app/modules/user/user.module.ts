@@ -23,14 +23,18 @@ import {HomeComponent} from "./home/home.component";
 import {TripsListComponent} from "./trips-list/trips-list.component";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
-
+import {SelectedTripComponent} from "./trips-list/selected-trip/selected-trip.component";
+import {BackGroundPage} from "../shared/back-ground/back-ground.page";
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 @NgModule({
   declarations: [
     UserPage,
     SearchFormComponent,
     MapsAutocompleteComponent,
     HomeComponent,
-    TripsListComponent
+    TripsListComponent,
+    SelectedTripComponent,
+    // BackGroundPage
   ],
   imports: [
     CommonModule,
@@ -49,7 +53,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
     MatSelectModule,
     MatListModule,
     MatProgressSpinnerModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    // BackGroundPageModule
+    LeafletModule
   ],
 
 })

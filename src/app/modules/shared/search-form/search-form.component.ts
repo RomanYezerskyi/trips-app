@@ -11,7 +11,7 @@ import {IonModal, RangeCustomEvent} from "@ionic/angular";
   styleUrls: ['./search-form.component.scss'],
 })
 export class SearchFormComponent  implements OnInit {
-  @Input() trip: SearchTripModel = { countOfSeats: 1, startTime: new Date().toDateString() } as SearchTripModel;
+  @Input() trip: SearchTripModel = { countOfSeats: 1, startTime: new Date().toString() } as SearchTripModel;
   @ViewChild(IonModal) modal!: IonModal;
   dateNow: string = new Date().toISOString();
   counterActive: boolean = false;

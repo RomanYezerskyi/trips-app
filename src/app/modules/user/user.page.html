@@ -5,8 +5,32 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-<!--  <app-search-form class="form" [trip]="trip"></app-search-form>-->
- <div class="content">
-   <ion-router-outlet></ion-router-outlet>
- </div>
+<div class="content">
+  <div class="map-block">
+    <div id="map"> </div>
+  </div>
+</div>
+
+
+    <ion-router-outlet></ion-router-outlet>
+    <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="search">
+        <ion-icon name="play-circle"></ion-icon>
+        Listen Now
+      </ion-tab-button>
+      <ion-tab-button tab="radio">
+        <ion-icon name="radio"></ion-icon>
+        Radio
+      </ion-tab-button>
+      <ion-tab-button tab="library">
+        <ion-icon name="library"></ion-icon>
+        Library
+      </ion-tab-button>
+      <ion-tab-button tab="search">
+        <ion-icon name="search"></ion-icon>
+        Search
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
 </ion-content>
