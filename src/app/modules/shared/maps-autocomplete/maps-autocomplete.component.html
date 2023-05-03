@@ -1,5 +1,5 @@
 <div class="container">
-    <button type="button" id="open-modal+{{label}}" class="search-btn">
+    <button type="button" id="open-modal+{{label}}" class="search-btn" (click)="generateMap()">
       <ion-icon size="large" color="primary" name="navigate"></ion-icon> <p>{{place ?? label}}</p>
     </button>
 </div>
@@ -16,8 +16,9 @@
               </ion-buttons>
             </ion-toolbar>
           </ion-header>
-          <ion-content class="ion-padding modal-back">
+          <ion-content class="ion-padding ">
 
+            <app-place-suggestion-back-ground></app-place-suggestion-back-ground>
             <ion-searchbar id="place" class="custom" name="place" [(ngModel)]="place" [formControl]="inputFieldFormControl" [placeholder]="label" ></ion-searchbar>
 
             <mat-list role="list" class="list">

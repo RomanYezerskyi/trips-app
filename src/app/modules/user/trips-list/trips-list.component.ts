@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {GeocodingFeatureProperties} from "../../../core/models/autocomplete-models/place-suggestion-model";
+import {GeocodingFeatureProperties} from "../../../core/models/maps-models/place-suggestion-model";
 import {Subject, takeUntil} from "rxjs";
 import {SearchTripModel} from "../../../core/models/trip-models/search-trip-model";
 import {TripModel} from "../../../core/models/trip-models/trip-model";
@@ -23,6 +23,7 @@ export class TripsListComponent  implements OnInit {
   @ViewChild(IonModal) modal!: IonModal;
   trips: TripsResponseModel = {} as TripsResponseModel;
   trip: SearchTripModel = { orderBy: TripOrderBy.EarliestDepartureTime } as SearchTripModel;
+  selectedTrip: SearchTripModel = { orderBy: TripOrderBy.EarliestDepartureTime } as SearchTripModel;
   totalTrips: number = 0;
   private Skip: number = 0;
   private Take: number = 5;
@@ -62,10 +63,16 @@ export class TripsListComponent  implements OnInit {
   }
 
   navigateToTripPage(id: number): void {
-    const url = this.router.serializeUrl(
-      this.router.createUrlTree(['/user/trip-page-info', id], { queryParams: { requestedSeats: this.trip.countOfSeats } })
-    );
-    window.open(url, '_blank');
+    // const url = this.router.serializeUrl(
+    //   this.router.createUrlTree(['/user/trip-page-info', id], { queryParams: { requestedSeats: this.trip.countOfSeats } })
+    // );
+    // window.open(url, '_blank');
+
+    const trip = this.trips.trips.find(x=>x.id == id);
+    if (trip) {
+      this.selectedTrip = trip;
+    }
+
   }
   sanitizeUserImg(img: string): SafeUrl {
     return this.imgSanitaze.sanitiizeUserImg(img);

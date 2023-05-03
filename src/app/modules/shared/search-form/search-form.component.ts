@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {PlaceSuggestionModel} from "../../../core/models/autocomplete-models/place-suggestion-model";
+import {PlaceSuggestionModel} from "../../../core/models/maps-models/place-suggestion-model";
 import {TripOrderBy} from "../../../core/enums/trip-order-by";
 import {SearchTripModel} from "../../../core/models/trip-models/search-trip-model";
 import {Router} from "@angular/router";
@@ -31,7 +31,6 @@ export class SearchFormComponent  implements OnInit {
     this.trip.countOfSeats = +this.trip.countOfSeats - 1;
   }
   search(): void {
-    debugger;
     this.router.navigate(['/user/search'], {
       queryParams: {
         startPlace: this.trip.startPlace,

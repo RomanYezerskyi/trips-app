@@ -1,11 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-
 import { IonicModule } from '@ionic/angular';
-
 import { UserPageRoutingModule } from './user-routing.module';
-
 import { UserPage } from './user.page';
 import {SearchFormComponent} from "../shared/search-form/search-form.component";
 import {MapsAutocompleteComponent} from "../shared/maps-autocomplete/maps-autocomplete.component";
@@ -24,8 +21,11 @@ import {TripsListComponent} from "./trips-list/trips-list.component";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import {SelectedTripComponent} from "./trips-list/selected-trip/selected-trip.component";
-import {BackGroundPage} from "../shared/back-ground/back-ground.page";
+import {BackGroundPage} from "../shared/background-pages/back-ground/back-ground.page";
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import {
+  PlaceSuggestionBackGroundComponent
+} from "../shared/background-pages/place-suggestion-back-ground/place-suggestion-back-ground.component";
 @NgModule({
   declarations: [
     UserPage,
@@ -34,7 +34,8 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
     HomeComponent,
     TripsListComponent,
     SelectedTripComponent,
-    // BackGroundPage
+    BackGroundPage,
+    PlaceSuggestionBackGroundComponent
   ],
   imports: [
     CommonModule,

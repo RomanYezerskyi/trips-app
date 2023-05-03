@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { TripModel } from 'src/app/core/models/trip-models/trip-model';
-import { GeocodingFeatureProperties } from 'src/app/core/models/autocomplete-models/place-suggestion-model';
+import { GeocodingFeatureProperties } from 'src/app/core/models/maps-models/place-suggestion-model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
