@@ -4,17 +4,19 @@ import {IMapsBackgroundModel} from "../../models/maps-models/maps-background-mod
 import {environment} from "../../../../environments/environment";
 import * as L from "leaflet";
 import {Geolocation} from "@capacitor/geolocation";
+import {IRouteMapModel} from "../../models/maps-models/route-map-model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class BackGroundMapService {
-  private emptyMapModel: IMapsBackgroundModel = { buildMap: false, lon: undefined, lat: undefined }
-
+  private emptyMapModel: IMapsBackgroundModel = { buildMap: false, lon: undefined, lat: undefined };
+  private emptyRouteMapModel: IRouteMapModel = { buildMap: false, toLon: undefined, formLon: undefined, fromLat: undefined, toLat: undefined};
   public _buildMainBackGroundMap: BehaviorSubject<IMapsBackgroundModel> = new BehaviorSubject(this.emptyMapModel);
-
   public _buildPlaceSuggestionBackGroundMap: BehaviorSubject<IMapsBackgroundModel> = new BehaviorSubject(this.emptyMapModel);
   public _changeMarkerPositionSuggestionBackGroundMap: BehaviorSubject<IMapsBackgroundModel> = new BehaviorSubject(this.emptyMapModel);
+  public _buildRouteMap: BehaviorSubject<IRouteMapModel> = new BehaviorSubject(this.emptyRouteMapModel);
+
   constructor() { }
 
   public buildMainBackGroundMapHandler(value: IMapsBackgroundModel) {
@@ -31,6 +33,11 @@ export class BackGroundMapService {
     this._changeMarkerPositionSuggestionBackGroundMap.next(value);
   }
 
+  public buildRouteMapHandler(value: IRouteMapModel) {
+    this._buildRouteMap.next(value);
+  }
+
+
   public buildMap(lat: number, lon: number, zoom: number, name: string) {
     return L.map(name).setView([lat, lon], zoom);
   }
@@ -43,12 +50,29 @@ export class BackGroundMapService {
     }).addTo(map);
   }
 
+  public buildRouteLayer(fromLat: number, fromLon: number, toLat: number, toLon: number, zoom: number, map: L.Map) {
+    L.tileLayer(`${environment.geoapifyRouteLayer
+      .replace("$lat1$", fromLat.toString())
+      .replace("$lon1$", fromLon.toString())
+      .replace("$lat2$", toLat.toString())
+      .replace("$lon2$", toLon.toString())}${environment.geoapifyFirstApiKey}`, {
+      maxZoom: zoom,
+      id: "osm-bright",
+      //attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+  }
+
   public addMapMarker(lat: number, lon: number, map: L.Map, marker: L.Marker, icon: L.Icon<L.IconOptions>) {
     map.panTo(new L.LatLng(lat, lon));
 
     map.eachLayer((layer) => {
       if (layer instanceof L.Marker) map.removeLayer(marker);
     });
+    marker = L.marker([lat, lon], { icon: icon }).addTo(map);
+  }
+
+  public addMapMarkers(lat: number, lon: number, map: L.Map, marker: L.Marker, icon: L.Icon<L.IconOptions>) {
+    map.panTo(new L.LatLng(lat, lon));
     marker = L.marker([lat, lon], { icon: icon }).addTo(map);
   }
 

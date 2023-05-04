@@ -23,7 +23,9 @@ export class TripsListComponent  implements OnInit {
   @ViewChild(IonModal) modal!: IonModal;
   trips: TripsResponseModel = {} as TripsResponseModel;
   trip: SearchTripModel = { orderBy: TripOrderBy.EarliestDepartureTime } as SearchTripModel;
-  selectedTrip: SearchTripModel = { orderBy: TripOrderBy.EarliestDepartureTime } as SearchTripModel;
+  selectedTripId: number | undefined;
+  selectedTripSeats: number | undefined;
+  isOpenedModal: boolean = false;
   totalTrips: number = 0;
   private Skip: number = 0;
   private Take: number = 5;
@@ -52,6 +54,7 @@ export class TripsListComponent  implements OnInit {
         this.trip.endLon = params['endLon'];
         this.searchTrips();
         this.isSpinner = true;
+        this.selectedTripSeats = params['seats'];
       }
     });
     this.trips.trips = [];
@@ -63,14 +66,10 @@ export class TripsListComponent  implements OnInit {
   }
 
   navigateToTripPage(id: number): void {
-    // const url = this.router.serializeUrl(
-    //   this.router.createUrlTree(['/user/trip-page-info', id], { queryParams: { requestedSeats: this.trip.countOfSeats } })
-    // );
-    // window.open(url, '_blank');
-
     const trip = this.trips.trips.find(x=>x.id == id);
     if (trip) {
-      this.selectedTrip = trip;
+      this.selectedTripId = trip.id;
+      this.isOpenedModal = true;
     }
 
   }

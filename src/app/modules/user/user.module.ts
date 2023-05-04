@@ -20,12 +20,13 @@ import {HomeComponent} from "./home/home.component";
 import {TripsListComponent} from "./trips-list/trips-list.component";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
-import {SelectedTripComponent} from "./trips-list/selected-trip/selected-trip.component";
+import {SelectedTripComponent} from "../shared/selected-trip/selected-trip.component";
 import {BackGroundPage} from "../shared/background-pages/back-ground/back-ground.page";
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import {
   PlaceSuggestionBackGroundComponent
 } from "../shared/background-pages/place-suggestion-back-ground/place-suggestion-back-ground.component";
+import {SmallMapComponent} from "../shared/background-pages/small-map/small-map.component";
 @NgModule({
   declarations: [
     UserPage,
@@ -35,7 +36,8 @@ import {
     TripsListComponent,
     SelectedTripComponent,
     BackGroundPage,
-    PlaceSuggestionBackGroundComponent
+    PlaceSuggestionBackGroundComponent,
+    SmallMapComponent
   ],
   imports: [
     CommonModule,

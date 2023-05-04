@@ -1,0 +1,272 @@
+.container {
+  display: flex;
+  flex-flow: column;
+  width: 90%;
+  //height: 75vh;
+  margin: auto;
+  background-color: #f7fafc;
+  padding: 10px;
+  box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 20%) !important;
+  border-radius: 10px;
+  color: black;
+  position: absolute;
+}
+
+ion-label{
+ display: flex;
+
+  .item_icon {
+    margin-right: 15px;
+    //font-size: 20px;
+  }
+  p {
+    margin: auto;
+  }
+}
+
+.container .search_info {
+  box-shadow: none;
+}
+
+.container .header {
+  //display: flex;
+  margin: 20px 0;
+  // justify-content: center;
+}
+
+.start,
+.destination {
+  display: flex;
+  flex-flow: row wrap;
+
+  .item_icon {
+    margin-right: 10px;
+    font-size: 20px;
+  }
+
+  p {
+    margin: auto;
+    font-weight: bold;
+  }
+
+  .place_item {
+    width: 100%;
+    margin: 10px auto;
+    font-weight: normal;
+  }
+}
+
+.line {
+  margin: 0 10px;
+  height: 55px;
+  width: 2px;
+  background-color: #000;
+}
+
+.date {
+  text-align: center;
+
+  h4 {
+    font-size: 30px;
+    font-weight: 600;
+  }
+}
+
+.container .price,
+.user {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  margin: 10px 10px;
+  position: relative;
+
+  .material-icons {
+    position: absolute;
+    top: -10px;
+    left: 42px;
+    cursor: pointer;
+  }
+
+  p {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  .user_img {
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    border-radius: 50%;
+  }
+
+  .img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+
+}
+
+.user>p {
+  display: block;
+  margin: auto;
+  margin-left: 50px;
+}
+
+.horizontal_line {
+  border: 1px #000 solid;
+  margin: 10px;
+  background-color: #000;
+}
+
+.btn_continue {
+  box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 6%) !important;
+  color: #000;
+  font-size: 20px;
+  margin: 10px auto;
+  padding: 7px 20px;
+  background-color: #ccc;
+}
+
+.owner-info {
+  margin: 5px 10px;
+
+  p {
+    margin: 10px 0;
+    font-size: 20px;
+    font-weight: 500;
+  }
+
+  .chat {
+    display: flex;
+
+    .material-icons {
+      margin: auto 10px;
+    }
+  }
+}
+
+.wrapper {
+  position: relative;
+  background-color: #f7fafc;
+  padding: 10px;
+  box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 20%) !important;
+}
+
+.box {
+  display: flex;
+  align-items: stretch;
+  margin: 30px;
+}
+
+.seats {
+  display: inline-block;
+  position: relative;
+  margin: 24px auto;
+  padding-top: 100px;
+  padding-bottom: 24px;
+  padding-right: 10px;
+  padding-left: 10px;
+  border: 4px solid rgb(225, 236, 237);
+  border-radius: 120px 120px 24px 24px / 84px 84px 24px 24px;
+  width: 228px;
+}
+
+.seats_list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+}
+
+.seat {
+  border: none;
+  width: 100%;
+  height: 100%;
+  color: rgb(0, 175, 245);
+  cursor: pointer;
+  border: 2px solid rgb(0, 175, 245);
+  border-radius: 12px;
+}
+
+.seat:hover {
+  transform: translateY(-2%);
+  transition: all 0.15s ease;
+}
+
+.seat_item {
+  margin: 1px;
+  margin-bottom: 10px;
+  width: 50px;
+  height: 50px;
+  // border: 2px solid rgb(0, 175, 245);
+  // border-radius: 12px;
+
+  background: rgba(0, 0, 0, 0);
+  overflow: hidden;
+}
+
+.seat_item:nth-child(4n+2) {
+  margin-right: 20px;
+}
+
+.booked {
+  border: 2px solid rgb(221, 221, 221);
+  color: rgb(112, 140, 145);
+  background: rgb(221, 221, 221);
+  cursor: unset;
+}
+
+.seat_selected {
+  color: white;
+  cursor: pointer;
+  border: 2px solid rgb(221, 221, 221);
+  background-color: rgb(0, 175, 245, 0.8);
+}
+
+
+
+.wheel {
+  width: 56px;
+  height: 56px;
+  overflow: hidden;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 30px;
+}
+
+.img__wheel {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.book_info {
+  margin: 24px 10px;
+
+}
+
+h2 {
+  text-align: center;
+}
+
+.actions {
+  margin: auto;
+}
+
+.btn_action {
+  width: 70px;
+  border: none;
+  text-decoration: none;
+  background: teal;
+  border: 1px solid #006d6d;
+  border-radius: 50em;
+  color: white;
+  padding: 10px;
+}
+
+.btn_action:nth-child(1) {
+  margin: 10px;
+}
+
