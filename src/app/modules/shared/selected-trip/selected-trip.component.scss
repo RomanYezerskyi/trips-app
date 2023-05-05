@@ -1,7 +1,7 @@
 .container {
   display: flex;
   flex-flow: column;
-  width: 90%;
+  //width: 90%;
   //height: 75vh;
   margin: auto;
   background-color: #f7fafc;
@@ -9,7 +9,10 @@
   box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 20%) !important;
   border-radius: 10px;
   color: black;
-  position: absolute;
+}
+
+.item_icon {
+  color: #428cff;
 }
 
 ion-label{
@@ -153,12 +156,13 @@ ion-label{
   background-color: #f7fafc;
   padding: 10px;
   box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 20%) !important;
+  color: black;
+  border-radius: 10px;
 }
 
 .box {
   display: flex;
   align-items: stretch;
-  margin: 30px;
 }
 
 .seats {
@@ -181,7 +185,6 @@ ion-label{
 }
 
 .seat {
-  border: none;
   width: 100%;
   height: 100%;
   color: rgb(0, 175, 245);
@@ -232,7 +235,6 @@ ion-label{
   height: 56px;
   overflow: hidden;
   border-radius: 50%;
-  overflow: hidden;
   margin-bottom: 30px;
 }
 
@@ -257,7 +259,6 @@ h2 {
 
 .btn_action {
   width: 70px;
-  border: none;
   text-decoration: none;
   background: teal;
   border: 1px solid #006d6d;
@@ -270,3 +271,57 @@ h2 {
   margin: 10px;
 }
 
+.car-details {
+  //border: 1px solid red;
+  padding: 5px;
+
+  .item_icon {
+    color: #428cff;
+    font-size: 18px;
+  }
+
+  .title {
+    margin: 0;
+    //padding-top: 5px;
+    display: flex;
+
+    .item_icon {
+      margin-right: 10px;
+    }
+
+    span {
+      margin: auto 0;
+      font-size: 15px;
+      font-weight: lighter;
+    }
+  }
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .details {
+    display: flex;
+    //background-color: #5298e2;
+    padding: 5px;
+    border-radius: 5px;
+    //color: white;
+
+    .item_icon {
+      color:  #5298e2;
+      font-size: 20px;
+      margin-right: 10px;
+    }
+
+    p {
+      text-align: center;
+      margin: auto 0;
+    }
+  }
+}
+
+.modal-back {
+  --background: rgb(2,0,36);
+  --background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(198,219,244,0.8408613445378151) 0%, rgba(82,152,226,0.8772759103641457) 100%);
+}

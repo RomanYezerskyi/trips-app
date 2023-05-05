@@ -1,6 +1,4 @@
 <div class="content">
-
-
   <div class="no-content" *ngIf="!isTrips && trips.trips.length === 0">
     <img src="../../../../assets/traveler.png" alt="">
     <h3>There are no trips yet :)</h3>
@@ -41,6 +39,6 @@
     </div>
   </div>
 
-  <app-selected-trip [requestedSeats]="selectedTripSeats" [id]="selectedTripId" [isOpen]="isOpenedModal"></app-selected-trip>
+  <app-selected-trip [requestedSeats]="selectedTripSeats" [id]="selectedTripId"></app-selected-trip>
 
 </div>

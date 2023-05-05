@@ -16,6 +16,7 @@ export class BackGroundMapService {
   public _buildPlaceSuggestionBackGroundMap: BehaviorSubject<IMapsBackgroundModel> = new BehaviorSubject(this.emptyMapModel);
   public _changeMarkerPositionSuggestionBackGroundMap: BehaviorSubject<IMapsBackgroundModel> = new BehaviorSubject(this.emptyMapModel);
   public _buildRouteMap: BehaviorSubject<IRouteMapModel> = new BehaviorSubject(this.emptyRouteMapModel);
+  public _tripDistance: BehaviorSubject<{distance: number, time: number}> = new BehaviorSubject({ time: 0, distance: 0 });
 
   constructor() { }
 
@@ -50,16 +51,28 @@ export class BackGroundMapService {
     }).addTo(map);
   }
 
-  public buildRouteLayer(fromLat: number, fromLon: number, toLat: number, toLon: number, zoom: number, map: L.Map) {
-    L.tileLayer(`${environment.geoapifyRouteLayer
-      .replace("$lat1$", fromLat.toString())
-      .replace("$lon1$", fromLon.toString())
-      .replace("$lat2$", toLat.toString())
-      .replace("$lon2$", toLon.toString())}${environment.geoapifyFirstApiKey}`, {
-      maxZoom: zoom,
-      id: "osm-bright",
-      //attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  public buildRouteLayer(fromLat: number, fromLon: number, toLat: number, toLon: number, map: L.Map) {
+   L.Routing.control({
+      waypoints: [L.latLng(fromLat, fromLon), L.latLng(toLat, toLon)],
+      routeWhileDragging: true
     }).addTo(map);
+  }
+
+  public getRouteData(fromLat: number, fromLon: number, toLat: number, toLon: number, map: L.Map) {
+    const route = L.Routing.control({
+      waypoints: [L.latLng(fromLat, fromLon), L.latLng(toLat, toLon)],
+      routeWhileDragging: true
+    }).addTo(map);
+
+    route.on('routesfound', (e) => {
+      const routes = e.routes;
+      const summary = routes[0].summary;
+
+      this._tripDistance.next({
+        distance: parseInt((summary.totalDistance / 1000)?.toFixed(0)),
+        time: summary.totalTime
+      });
+    } )
   }
 
   public addMapMarker(lat: number, lon: number, map: L.Map, marker: L.Marker, icon: L.Icon<L.IconOptions>) {

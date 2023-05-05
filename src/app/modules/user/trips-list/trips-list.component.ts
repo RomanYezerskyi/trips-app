@@ -12,6 +12,7 @@ import {TripService} from "../../../core/services/trip-service/trip.service";
 import {ImgSanitizerService} from "../../../core/services/image-sanitizer-service/img-sanitizer.service";
 import {TripsResponseModel} from "../../../core/models/trip-models/trips-response-model";
 import {IonModal} from "@ionic/angular";
+import {SelectedTripModalService} from "../../../core/services/trip-service/selected-trip-modal.service";
 
 @Component({
   selector: 'app-trips-list',
@@ -25,7 +26,6 @@ export class TripsListComponent  implements OnInit {
   trip: SearchTripModel = { orderBy: TripOrderBy.EarliestDepartureTime } as SearchTripModel;
   selectedTripId: number | undefined;
   selectedTripSeats: number | undefined;
-  isOpenedModal: boolean = false;
   totalTrips: number = 0;
   private Skip: number = 0;
   private Take: number = 5;
@@ -37,7 +37,8 @@ export class TripsListComponent  implements OnInit {
     private route: ActivatedRoute,
     private tripService: TripService,
     private imgSanitaze: ImgSanitizerService,
-    private mapsService: MapsService) {
+    private mapsService: MapsService,
+    private selectedTripModalService: SelectedTripModalService) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
@@ -69,7 +70,7 @@ export class TripsListComponent  implements OnInit {
     const trip = this.trips.trips.find(x=>x.id == id);
     if (trip) {
       this.selectedTripId = trip.id;
-      this.isOpenedModal = true;
+      this.selectedTripModalService._modalOpened.next(true);
     }
 
   }

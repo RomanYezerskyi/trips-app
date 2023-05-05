@@ -19,7 +19,6 @@ export const environment = {
   geoapifySecondApiKey: 'd06cb6573e1e488d92494d5296611f0c',
   geoapifyMarkerPoin: 'https://api.geoapify.com/v1/icon/?type=material&color=red&icon=point&iconType=awesome&apiKey=',
   geoapifyTileLayer: 'https://maps.geoapify.com/v1/tile/osm-bright/{z}/{x}/{y}.png?apiKey=',
-  geoapifyRouteLayer: 'https://api.geoapify.com/v1/routing?waypoints=$lat1$,$lon1$|$lat2$,$lon2$&mode=drive&apiKey=',
 
   //chat hub
   chatHubConnectionUrl: 'https://localhost:6001/chatHub',

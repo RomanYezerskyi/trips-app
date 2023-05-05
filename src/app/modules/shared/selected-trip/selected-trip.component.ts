@@ -15,6 +15,10 @@ import {IonModal} from "@ionic/angular";
 import {BackGroundMapService} from "../../../core/services/maps-service/back-ground-map.service";
 import {BookedTripModel} from "../../../core/models/trip-models/booked-trip-model";
 import {SeatModel} from "../../../core/models/car-models/seat-model";
+import {CarType} from "../../../core/enums/car-type";
+import {SelectedTripModalService} from "../../../core/services/trip-service/selected-trip-modal.service";
+import * as L from "leaflet";
+import 'leaflet-routing-machine';
 
 @Component({
   selector: 'app-selected-trip',
@@ -30,16 +34,27 @@ export class SelectedTripComponent  implements OnInit, OnDestroy {
   userPermission = UserPermissionsTrip;
   bookedtrip: BookedTripModel = { bookedSeats: [], id: 0, requestedSeats: 1, tripId: 0 };
   tabSelected = 1;
+  carType = CarType;
+  distance: number = 0;
+  time: string = "";
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private mapsService: MapsService,
     private tripService: TripService,
     private imgSanitaze: ImgSanitizerService,
-    private mapsBackgroundService: BackGroundMapService
+    private mapsBackgroundService: BackGroundMapService,
+    private selectedTripModalService: SelectedTripModalService
   ) { }
 
   ngOnInit() {
+    this.selectedTripModalService._modalOpened.subscribe(value => {
+      this.isOpen = value;
+    });
+    this.mapsBackgroundService._tripDistance.subscribe(value => {
+      this.distance = value.distance;
+      this.time = (value.time / 3600).toString().split(".")[0] + "h "  + Math.round(value.time % 3600 / 60) + "min";
+    });
   }
 
   ngOnDestroy(): void {
@@ -52,6 +67,7 @@ export class SelectedTripComponent  implements OnInit, OnDestroy {
   }
 
   cancel() {
+    this.selectedTripModalService._modalOpened.next(false);
     this.isOpen = false;
   }
 
@@ -96,14 +112,35 @@ export class SelectedTripComponent  implements OnInit, OnDestroy {
       || this.selectedTrip.availableSeats.find(x => x.seatId == item.id)?.availableSeatsType == 1);
   }
 
-  searchData = () => {
+  getAvailableSeatsCount(): number {
+    return this.selectedTrip.availableSeats.filter(x=>x.availableSeatsType === 0)?.length;
+  }
 
+  getBookedSeatsCount(): number {
+    return this.selectedTrip.availableSeats.filter(x=>x.availableSeatsType === 1)?.length;
+  }
+
+  searchData = () => {
     if(this.id) {
       this.tripService.getTripById(this.id).pipe(takeUntil(this.unsubscribe$)).subscribe(
         response => {
           this.getPlaces(response);
           this.selectedTrip = response;
           this.generateMap();
+
+          if (response.startLat && response.startLon && response.endLat && response.endLon) {
+            const map: L.Map = this.mapsBackgroundService.buildMap(response.startLat, response.endLon, 10, "default");
+
+            this.mapsBackgroundService.getRouteData(
+              response.startLat,
+              response.startLon,
+              response.endLat,
+              response.endLon,
+              map
+             );
+
+          }
+
         },
         (error: HttpErrorResponse) => { console.log(error.error); }
       );
@@ -111,15 +148,6 @@ export class SelectedTripComponent  implements OnInit, OnDestroy {
   }
 
   generateMap() {
-    // this.mapsBackgroundService.getCurrentPosition().then((value) => {
-    //   this.mapsBackgroundService._buildPlaceSuggestionBackGroundMap.next(
-    //     { buildMap: true,
-    //       lat: value.coords.latitude,
-    //       lon: value.coords.longitude
-    //     }
-    //   );
-    // });
-debugger;
     this.mapsBackgroundService.buildRouteMapHandler(
       {
         buildMap: true,

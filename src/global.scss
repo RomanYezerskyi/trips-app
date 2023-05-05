@@ -24,7 +24,9 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+@import "~leaflet-routing-machine/dist/leaflet-routing-machine.css";
 @import "~leaflet/dist/leaflet.css";
+
 
 body.backdrop-no-scroll{
   --ion-background-color: #ffff;
@@ -36,5 +38,14 @@ body.backdrop-no-scroll{
 }
 
 .content {
-  margin-top: 56px;
+  //margin-top: 56px;
 }
+
+.leaflet-routing-collapse-btn {
+  right: 18px !important;
+}
+
+.scroll-y {
+  padding: 0 !important;
+}
+
