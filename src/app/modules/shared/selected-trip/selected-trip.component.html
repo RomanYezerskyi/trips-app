@@ -13,7 +13,7 @@
             <ion-segment-button value="2" (click)="changeTab(2)">
               <ion-label>
                 <fa-icon [icon]="selectedTrip.car.carType === carType.Sedan ? 'car' : 'bus'" class="item_icon"></fa-icon>
-                <p>Seats</p>
+                <p>Details</p>
               </ion-label>
             </ion-segment-button>
             <ion-segment-button value="3" (click)="changeTab(3)">
@@ -121,7 +121,6 @@
             </div>
           </div>
         </div>
-
         <div class="car-details">
           <p class="title">
             <fa-icon icon="map-location" class="item_icon">
@@ -132,7 +131,7 @@
             <div class="details">
               <fa-icon icon="arrows-left-right-to-line" class="item_icon">
               </fa-icon>
-              <p>Distance: {{distance}}</p>
+              <p>Distance: {{distance}} km</p>
             </div>
             <div class="details">
               <fa-icon icon="clock" class="item_icon">
@@ -141,42 +140,52 @@
             </div>
           </div>
         </div>
-
-<!--        <h2 >Choose {{requestedSeats}} places</h2>-->
-<!--        <div class="">{{selectedTrip.car.modelName}}</div>-->
-<!--        <div class="">{{selectedTrip.car.registrationNumber}}</div>-->
-<!--        <div class="">{{distance}}</div>-->
-<!--        <div class="">{{time}}</div>-->
-        <div class="">
-         </div>
-          <div class="box">
-            <div class="seats">
-              <div class="wheel">
-                <img src="../../../../assets/wheel.png" class="img__wheel" alt="">
-              </div>
-              <div class="seats_list">
-                <div *ngFor="let item of  selectedTrip?.car?.seats" class="seat_item">
-                  <button class="btn seat booked" disabled *ngIf="cheackSeat(item); else elseItem">
-                    {{item.seatNumber}}
-                  </button>
-                  <ng-template #elseItem>
-                    <button class="btn seat" (click)="bookSeat(item.id)"
-                            *ngIf="!item.isSelected; else elseSeat">{{item.seatNumber}}</button>
-                    <ng-template #elseSeat>
-                      <button class="btn seat seat_selected" (click)="bookSeat(item.id)">{{item.seatNumber}}</button>
-                    </ng-template>
+        <!-- booking seats for a buses -->
+        <div class="box" *ngIf="selectedTrip.car.carType === carType.Bus">
+          <div class="seats">
+            <div class="wheel">
+              <img src="../../../../assets/wheel.png" class="img__wheel" alt="">
+            </div>
+            <div class="seats_list">
+              <div *ngFor="let item of  selectedTrip?.car?.seats" class="seat_item">
+                <button class="btn seat booked" disabled *ngIf="cheackSeat(item); else elseItem">
+                  {{item.seatNumber}}
+                </button>
+                <ng-template #elseItem>
+                  <button class="btn seat" (click)="bookSeat(item.id)"
+                          *ngIf="!item.isSelected; else elseSeat">{{item.seatNumber}}</button>
+                  <ng-template #elseSeat>
+                    <button class="btn seat seat_selected" (click)="bookSeat(item.id)">{{item.seatNumber}}</button>
                   </ng-template>
-                </div>
+                </ng-template>
               </div>
             </div>
           </div>
-<!--        -->
-<!--          <div class="actions">-->
-<!--            <button class="btn_action" (click)="close()">Close</button>-->
-<!--            <button class="btn_action" (click)="confirmBook()">Confirm</button>-->
-<!--          </div>-->
+        </div>
+
+        <!-- booking seats for a sedans -->
+        <div class="booking-seats-range" *ngIf="selectedTrip.car.carType === carType.Sedan">
+          <p>The selected number of seats: {{countOfBookedSeats}}</p>
+          <ion-range aria-label="Range with pin" (ionChange)="onRangeChange($event)" [value]="countOfBookedSeats" [ticks]="true" step="1" min="1" [max]="getAvailableSeatsCount()" [pin]="true" [pinFormatter]="pinFormatter">
+          </ion-range>
+        </div>
+
+        <div class="booking-price" *ngIf="selectedTrip.car.carType === carType.Sedan">
+          <fa-icon icon="money-bill" class="item_icon"></fa-icon>
+          <p>Price: {{selectedTrip.pricePerSeat * countOfBookedSeats | currency:"UAH":"symbol"}}</p>
+        </div>
+
+        <div class="actions">
+          <ion-button id="present-alert">Confirm booking</ion-button>
+          <ion-alert
+            trigger="present-alert"
+            header="Alert!"
+            [buttons]="alertButtons"
+          ></ion-alert>
+        </div>
       </div >
       <div id="default"></div>
+
     </ion-content>
   </ng-template>
 </ion-modal>

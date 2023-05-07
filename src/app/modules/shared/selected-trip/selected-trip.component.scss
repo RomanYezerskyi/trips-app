@@ -254,7 +254,9 @@ h2 {
 }
 
 .actions {
-  margin: auto;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
 }
 
 .btn_action {
@@ -311,7 +313,7 @@ h2 {
     .item_icon {
       color:  #5298e2;
       font-size: 20px;
-      margin-right: 10px;
+      margin-right: 5px;
     }
 
     p {
@@ -324,4 +326,42 @@ h2 {
 .modal-back {
   --background: rgb(2,0,36);
   --background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(198,219,244,0.8408613445378151) 0%, rgba(82,152,226,0.8772759103641457) 100%);
+}
+
+
+ion-range {
+  --bar-background: #a2d2ff;
+  --bar-background-active: #bde0fe;
+  --bar-height: 8px;
+  --bar-border-radius: 8px;
+  --knob-background: #093a75;
+  --knob-size: 30px;
+  --pin-background: #093a75;
+  --pin-color: #fff;
+  --pin-font-size: 20px;
+  padding: 0 10px 0 10px;
+}
+
+.booking-seats-range {
+
+  p {
+    margin-bottom: 2px;
+    font-size: 18px;
+    font-weight: bold;
+  }
+}
+
+.booking-price {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+
+  .item_icon {
+    margin-right: 10px;
+    font-size: 20px;
+  }
+
+  p {
+    margin: auto 0;
+  }
 }

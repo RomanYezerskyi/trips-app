@@ -11,7 +11,7 @@ import {SafeUrl} from "@angular/platform-browser";
 import {GeocodingFeatureProperties} from "../../../core/models/maps-models/place-suggestion-model";
 import {HttpErrorResponse} from "@angular/common/http";
 import {UserPermissionsTrip} from "../../../core/enums/user-permissions-trip";
-import {IonModal} from "@ionic/angular";
+import {IonModal, RangeCustomEvent} from "@ionic/angular";
 import {BackGroundMapService} from "../../../core/services/maps-service/back-ground-map.service";
 import {BookedTripModel} from "../../../core/models/trip-models/booked-trip-model";
 import {SeatModel} from "../../../core/models/car-models/seat-model";
@@ -33,6 +33,7 @@ export class SelectedTripComponent  implements OnInit, OnDestroy {
   @Input() requestedSeats: number | undefined = 0;
   userPermission = UserPermissionsTrip;
   bookedtrip: BookedTripModel = { bookedSeats: [], id: 0, requestedSeats: 1, tripId: 0 };
+  countOfBookedSeats: number = this.requestedSeats ?? 1;
   tabSelected = 1;
   carType = CarType;
   distance: number = 0;
@@ -70,6 +71,31 @@ export class SelectedTripComponent  implements OnInit, OnDestroy {
     this.selectedTripModalService._modalOpened.next(false);
     this.isOpen = false;
   }
+
+  onRangeChange(ev: Event): void {
+    this.countOfBookedSeats = +(ev as RangeCustomEvent).detail.value.toString();
+  }
+
+  pinFormatter(value: number): string {
+    return `${value}`;
+  }
+
+  public alertButtons = [
+    {
+      text: 'Cancel',
+      role: 'cancel',
+      handler: () => {
+        // this.handlerMessage = 'Alert canceled';
+      },
+    },
+    {
+      text: 'OK',
+      role: 'confirm',
+      handler: () => {
+        // this.handlerMessage = 'Alert confirmed';
+      },
+    },
+  ];
 
   confirmBook(): void {
     if (this.requestedSeats != this.bookedtrip.bookedSeats.length) {
