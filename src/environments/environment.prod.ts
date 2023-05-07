@@ -1,5 +1,5 @@
 export const environment = {
-  production: true,
+  production: false,
   serviceApi: '',
 
   emailConfirmation: 'http://localhost:4200/auth/emailconfirmation',

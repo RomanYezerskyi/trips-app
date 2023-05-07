@@ -22,12 +22,10 @@ export class BackGroundMapService {
 
   public buildMainBackGroundMapHandler(value: IMapsBackgroundModel) {
     this._buildMainBackGroundMap.next(value);
-    // setTimeout(() => this._buildMainBackGroundMap.next(), 5000);
   }
 
   public buildPlaceSuggestionBackGroundMapHandler(value: IMapsBackgroundModel) {
     this._buildPlaceSuggestionBackGroundMap.next(value);
-    // setTimeout(() => this._buildMainBackGroundMap.next(), 5000);
   }
 
   public changeMarkerPositionSuggestionBackGroundMapHandler(value: IMapsBackgroundModel) {
@@ -54,14 +52,14 @@ export class BackGroundMapService {
   public buildRouteLayer(fromLat: number, fromLon: number, toLat: number, toLon: number, map: L.Map) {
    L.Routing.control({
       waypoints: [L.latLng(fromLat, fromLon), L.latLng(toLat, toLon)],
-      routeWhileDragging: true
+      routeWhileDragging: false,
     }).addTo(map);
   }
 
   public getRouteData(fromLat: number, fromLon: number, toLat: number, toLon: number, map: L.Map) {
     const route = L.Routing.control({
       waypoints: [L.latLng(fromLat, fromLon), L.latLng(toLat, toLon)],
-      routeWhileDragging: true
+      routeWhileDragging: false
     }).addTo(map);
 
     route.on('routesfound', (e) => {

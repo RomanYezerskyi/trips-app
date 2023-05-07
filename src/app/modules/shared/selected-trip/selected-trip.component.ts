@@ -1,6 +1,4 @@
-import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {SearchTripModel} from "../../../core/models/trip-models/search-trip-model";
-import {TripOrderBy} from "../../../core/enums/trip-order-by";
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {TripModel} from "../../../core/models/trip-models/trip-model";
 import {ActivatedRoute, Router} from "@angular/router";
 import {MapsService} from "../../../core/services/maps-service/maps.service";
@@ -11,7 +9,7 @@ import {SafeUrl} from "@angular/platform-browser";
 import {GeocodingFeatureProperties} from "../../../core/models/maps-models/place-suggestion-model";
 import {HttpErrorResponse} from "@angular/common/http";
 import {UserPermissionsTrip} from "../../../core/enums/user-permissions-trip";
-import {IonModal, RangeCustomEvent} from "@ionic/angular";
+import {RangeCustomEvent} from "@ionic/angular";
 import {BackGroundMapService} from "../../../core/services/maps-service/back-ground-map.service";
 import {BookedTripModel} from "../../../core/models/trip-models/booked-trip-model";
 import {SeatModel} from "../../../core/models/car-models/seat-model";
@@ -19,6 +17,8 @@ import {CarType} from "../../../core/enums/car-type";
 import {SelectedTripModalService} from "../../../core/services/trip-service/selected-trip-modal.service";
 import * as L from "leaflet";
 import 'leaflet-routing-machine';
+import {AvailableSeatsType} from "../../../core/enums/available-seats-type";
+import {AlertService} from "../../../core/services/alert.service";
 
 @Component({
   selector: 'app-selected-trip',
@@ -45,10 +45,18 @@ export class SelectedTripComponent  implements OnInit, OnDestroy {
     private tripService: TripService,
     private imgSanitaze: ImgSanitizerService,
     private mapsBackgroundService: BackGroundMapService,
-    private selectedTripModalService: SelectedTripModalService
+    private selectedTripModalService: SelectedTripModalService,
+    private alertService: AlertService,
   ) { }
 
   ngOnInit() {
+    this.route.queryParams.pipe(takeUntil(this.unsubscribe$)).subscribe(params => {
+      if (params['seats']) {
+        this.requestedSeats = params['seats'];
+        this.countOfBookedSeats = params['seats'];
+      }
+    });
+
     this.selectedTripModalService._modalOpened.subscribe(value => {
       this.isOpen = value;
     });
@@ -84,31 +92,60 @@ export class SelectedTripComponent  implements OnInit, OnDestroy {
     {
       text: 'Cancel',
       role: 'cancel',
-      handler: () => {
-        // this.handlerMessage = 'Alert canceled';
-      },
     },
     {
       text: 'OK',
       role: 'confirm',
       handler: () => {
-        // this.handlerMessage = 'Alert confirmed';
+        this.confirmBook();
       },
     },
   ];
 
   confirmBook(): void {
-    if (this.requestedSeats != this.bookedtrip.bookedSeats.length) {
-      return;
+    this.bookedtrip.tripId = this.selectedTrip.id;
+    if(this.selectedTrip.car.carType === CarType.Sedan && this.countOfBookedSeats > 0) {
+      const seats: SeatModel[] = [];
+      const availableSeats = this.selectedTrip.availableSeats.filter(x=>x.availableSeatsType === AvailableSeatsType.Free);
+      for (let i = 0; i < this.countOfBookedSeats; i++){
+        seats.push({
+          isSelected: true,
+          id: availableSeats[i]?.id,
+          seatNumber: 0,
+          tripUsers:[],
+          carId: this.selectedTrip.car.id})
+      }
+
+      this.bookedtrip.bookedSeats = seats;
+
+      this.bookedtrip.requestedSeats = this.countOfBookedSeats;
+
+      this.tripService.bookSeatsInTrip(this.bookedtrip).pipe(takeUntil(this.unsubscribe$)).subscribe(
+        response => {
+          this.alertService.showMessage({show: true, message: "Booking confirmed! Check your email!", error: false});
+        },
+        (error: HttpErrorResponse) => {
+          this.alertService.showMessage({show: true, message: "Something went wrong", error: true});
+        }
+      );
+    } else if (this.selectedTrip.car.carType === CarType.Bus) {
+      if (this.requestedSeats != this.bookedtrip.bookedSeats.length) {
+        this.alertService.showMessage({show: true, message: "Please select seats!", error: true});
+        return;
+      }
+      this.bookedtrip.tripId = this.selectedTrip.id;
+      this.bookedtrip.requestedSeats = this.requestedSeats;
+      this.tripService.bookSeatsInTrip(this.bookedtrip).pipe(takeUntil(this.unsubscribe$)).subscribe(
+        response => {
+          this.alertService.showMessage({show: true, message: "Booking confirmed! Check your email!", error: false});
+        },
+        (error: HttpErrorResponse) => {
+          this.alertService.showMessage({show: true, message: "Something went wrong", error: true});
+        }
+      );
+    } else {
+      this.alertService.showMessage({show: true, message: "Please select seats!", error: true});
     }
-    this.tripService.bookSeatsInTrip(this.bookedtrip).pipe(takeUntil(this.unsubscribe$)).subscribe(
-      response => {
-
-
-      },
-      (error: HttpErrorResponse) => {  }
-    )
-
   }
 
   bookSeat(seatId: number): void {

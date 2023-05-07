@@ -77,8 +77,6 @@
           </div>
           <p>{{selectedTrip.user?.firstName}}</p>
         </div>
-        <div class="horizontal_line"></div>
-<!--        <button mat-button (click)="openDialog()" class="btn_continue">Continue</button>-->
       </div>
       <div class="wrapper" *ngIf="tabSelected === 2">
         <div class="car-details">
@@ -141,6 +139,9 @@
           </div>
         </div>
         <!-- booking seats for a buses -->
+        <div class="booking-seats-range" *ngIf="selectedTrip.car.carType === carType.Bus">
+          <p>The selected number of seats: {{requestedSeats}}</p>
+        </div>
         <div class="box" *ngIf="selectedTrip.car.carType === carType.Bus">
           <div class="seats">
             <div class="wheel">
@@ -179,7 +180,8 @@
           <ion-button id="present-alert">Confirm booking</ion-button>
           <ion-alert
             trigger="present-alert"
-            header="Alert!"
+            header="Are you confirming the order? "
+            sub-header="The driver will receive a message about reserved seats!"
             [buttons]="alertButtons"
           ></ion-alert>
         </div>

@@ -56,7 +56,7 @@ export class LoginPage implements OnInit, OnDestroy {
           this.router.navigateByUrl("/user");
       },
       (error: HttpErrorResponse) => {
-        this.alertService.showMessage({show: true, message: "Something went wrong", error: true})
+        this.alertService.showMessage({show: true, message: "Something went wrong", error: true});
       }
     );
   }

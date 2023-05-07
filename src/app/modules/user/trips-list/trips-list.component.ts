@@ -13,6 +13,7 @@ import {ImgSanitizerService} from "../../../core/services/image-sanitizer-servic
 import {TripsResponseModel} from "../../../core/models/trip-models/trips-response-model";
 import {IonModal} from "@ionic/angular";
 import {SelectedTripModalService} from "../../../core/services/trip-service/selected-trip-modal.service";
+import {CarType} from "../../../core/enums/car-type";
 
 @Component({
   selector: 'app-trips-list',
@@ -32,6 +33,7 @@ export class TripsListComponent  implements OnInit {
   isTrips: boolean = true;
   isSpinner: boolean = false;
   public isFullListDisplayed: boolean = false;
+  carType = CarType;
   constructor(
     private router: Router,
     private route: ActivatedRoute,

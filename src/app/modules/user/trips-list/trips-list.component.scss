@@ -80,9 +80,10 @@
 
     .price {
       margin: 10px;
+      display: flex;
 
       p {
-        margin: 0;
+        margin:0 5px;
         font-size: 20px;
       }
     }

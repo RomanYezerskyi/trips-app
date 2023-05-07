@@ -26,6 +26,7 @@
             </div>
             <div class="price">
               <p>{{trip.pricePerSeat | currency:"UAH":"symbol"}}</p>
+              <fa-icon [icon]="trip?.car?.carType === carType?.Sedan ? 'car' : 'bus'" class="item_icon"></fa-icon>
             </div>
           </div>
         </div>
