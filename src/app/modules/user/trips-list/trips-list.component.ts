@@ -74,11 +74,12 @@ export class TripsListComponent  implements OnInit {
       this.selectedTripId = trip.id;
       this.selectedTripModalService._modalOpened.next(true);
     }
-
   }
+
   sanitizeUserImg(img: string): SafeUrl {
     return this.imgSanitaze.sanitiizeUserImg(img);
   }
+
   onScroll(): void {
     this.Skip += this.Take;
     if (this.Skip <= this.trips.trips.length) {

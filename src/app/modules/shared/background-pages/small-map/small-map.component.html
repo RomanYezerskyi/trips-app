@@ -1,3 +1,12 @@
 <div class="map-block">
+  <div class="toggles">
+    <ion-toggle [value]="showUserPosition" (click)="userPositionToggle()" >
+      <p><fa-icon icon="user" class="item_icon"></fa-icon> Show you</p>
+    </ion-toggle>
+    <ion-toggle >
+      <p> <fa-icon icon="car" class="item_icon"></fa-icon> Show car</p>
+      {{" "}}
+    </ion-toggle>
+  </div>
   <div id="small-map"> </div>
 </div>

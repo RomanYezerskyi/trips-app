@@ -1,0 +1,20 @@
+<div class="wrapper">
+  <div [ngClass]="isSpinner ? 'hide-spinner': ''"></div>
+  <mat-progress-spinner mode="indeterminate" *ngIf="isSpinner"></mat-progress-spinner>
+  <div class="body">
+    <div class="row">
+      <div class="img">
+        <img [src]="sanitizeUserImg(user.userImg!)" alt="" class="profile_img">
+      </div>
+      <div class="user">
+        <h4>{{user.firstName}}</h4>
+        <p>{{user.email}}</p>
+        <p>{{user.phoneNumber}}</p>
+      </div>
+    </div>
+    <div class="column">
+      <app-user-trips-list></app-user-trips-list>
+      <app-booked-trips-list></app-booked-trips-list>
+    </div>
+  </div>
+</div>

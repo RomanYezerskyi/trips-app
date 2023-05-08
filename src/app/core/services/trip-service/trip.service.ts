@@ -29,6 +29,11 @@ export class TripService {
     return this.http.get<TripsResponseModel>(url, { params: { take: take, skip: skip } });
   }
 
+  getUserStartedBookedTrips(take: number, skip: number): Observable<TripsResponseModel> {
+    const url = this.baseApiUrl + 'BookedTrip/started';
+    return this.http.get<TripsResponseModel>(url, { params: { take: take, skip: skip } });
+  }
+
   deleteUserFromTrip(tripUser: { userId: string, tripId: number }): Observable<any> {
     const url = this.baseApiUrl + 'BookedTrip/user';
     return this.http.delete(url, { body: tripUser });

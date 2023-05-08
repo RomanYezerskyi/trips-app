@@ -1,0 +1,309 @@
+.content{
+  color: black;
+}
+
+.item_icon {
+  color: #428cff;
+}
+
+ion-label {
+  .item_icon {
+    color: #fff;
+  }
+}
+
+.items {
+  .search_item {
+    font-weight: 600;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 10px;
+    box-shadow: rgb(0 0 0 / 16%) 2px 1pt 4pt, rgb(0 0 0 /  15%) 2px 2pt 8pt;
+    transition: box-shadow 200ms ease-in 0s;
+    background-color: rgb(255, 255, 255);
+    flex: 1 1 0;
+  }
+
+  .search_item:first-child {
+    margin-top: 0;
+  }
+
+  .search_item:hover {
+    box-shadow: rgb(0 0 0 / 8%) 0px 2pt 8pt, rgb(0 0 0 / 8%) 0px 2pt 16pt;
+  }
+
+  .header {
+    display: flex;
+    padding: 5px 0;
+
+    .time,
+    .cities {
+      display: flex;
+      flex-flow: column;
+      justify-content: space-between;
+      width: 70%;
+    }
+
+    .line {
+      border: 1px #000 solid;
+      height: 80px;
+      padding: 0;
+      background-color: #000;
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
+    .start,
+    .destination {
+      display: flex;
+      flex-flow: raw wrap;
+    }
+
+    .start p,
+    .destination p {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .start p {
+      font-size: 18px;
+    }
+
+    .item_icon {
+      font-size: 20px;
+      margin-right: 10px;
+    }
+
+    .time {
+      margin: 10px;
+      margin-right: 0;
+    }
+
+    .cities {
+      margin: 10px;
+      margin-left: 0;
+    }
+
+    .time p {
+      margin: 0;
+    }
+
+    .price_item {
+      display: flex;
+      flex-flow: raw wrap;
+      justify-content: space-between;
+      width: 100%;
+    }
+  }
+
+  .body {
+    display: flex;
+
+
+    .profile_img {
+      width: 50px;
+      height: 50px;
+      overflow: hidden;
+      border-radius: 50%;
+      margin-top: 10px;
+      margin-left: 15px;
+      margin-right: 10px;
+      margin-bottom: 10px;
+    }
+
+    .img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    p {
+      display: block;
+      margin: auto 20px;
+    }
+  }
+}
+
+.list_users {
+  font-weight: 500;
+  width: 100%;
+
+  .user {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+
+    .material-icons {
+      margin: auto 0;
+      cursor: pointer;
+    }
+
+    .user_info {
+      display: flex;
+    }
+
+
+
+    .body {
+      width: 200px;
+      display: flex;
+      position: relative;
+
+      .icon {
+        cursor: pointer;
+        // background-color: #fff;
+        position: absolute;
+        left: 5px;
+        font-size: 15px;
+        color: black;
+
+        // right: 0%;
+        // top: -5px;
+        // margin: auto;
+      }
+
+      .user_name {
+        margin: auto 20px;
+      }
+    }
+
+    .booked-seats {
+      display: flex;
+      flex-flow: row wrap;
+      width: 139px;
+
+      p {
+        margin: auto;
+        margin-right: 5px;
+      }
+
+      .booked_seats_num {
+        margin: 3px 3px;
+        width: 40px;
+        height: 40px;
+        border: 2px solid rgb(221, 221, 221);
+        color: rgb(85, 104, 107);
+        background: rgb(221, 221, 221);
+        border-radius: 5px;
+        display: flex;
+        cursor: pointer;
+
+        p {
+          margin: auto;
+        }
+      }
+    }
+  }
+
+  .profile_img {
+    margin: auto 5px;
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    border-radius: 10px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
+
+.is-disabled {
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+.search_item:hover {
+  opacity: 1;
+  // cursor: pointer;
+}
+
+ion-title {
+  color: white;
+}
+
+.btn-delete-trip {
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.price {
+  margin: 10px;
+  display: flex;
+
+  p {
+    margin:0 5px;
+    font-size: 20px;
+  }
+
+  .item_icon {
+    margin: auto;
+  }
+}
+
+ion-accordion {
+  margin: 0 auto;
+  border-radius: 10px;
+  box-shadow: rgb(0 0 0 / 16%) 2px 1pt 4pt, rgb(0 0 0 /  15%) 2px 2pt 8pt;
+  overflow: hidden;
+}
+
+ion-accordion.accordion-expanding,
+ion-accordion.accordion-expanded {
+  width: calc(100% - 2px);
+  margin: 5px auto;
+}
+
+ion-accordion.accordion-collapsing ion-item[slot='header'],
+ion-accordion.accordion-collapsed ion-item[slot='header'] {
+  --background: white;
+  --color: black;
+}
+
+ion-accordion.accordion-expanding ion-item[slot='header'],
+ion-accordion.accordion-expanded ion-item[slot='header'] {
+  --background: var(--ion-color-primary);
+  --color: var(--ion-color-primary-contrast);
+}
+
+.booked-seats {
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+  padding: 10px;
+
+  p {
+    margin: auto 0;
+    margin-right: 5px;
+  }
+
+  .booked_seats_num {
+    margin: 5px 6px;
+    width: 45px;
+    height: 45px;
+    border: 2px solid rgb(221, 221, 221);
+    color: rgb(85, 104, 107);
+    background: rgb(221, 221, 221);
+    border-radius: 5px;
+    display: flex;
+    cursor: pointer;
+    position: relative;
+
+    p {
+      margin: auto;
+    }
+
+    .item_icon {
+      cursor: pointer;
+      color: #000;
+      position: absolute;
+      top: -14px;
+      right: -15px;
+      background-color: #fff;
+      border-radius: 100%;
+    }
+  }
+}

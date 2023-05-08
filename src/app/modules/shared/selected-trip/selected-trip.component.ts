@@ -27,6 +27,7 @@ import {AlertService} from "../../../core/services/alert.service";
 })
 export class SelectedTripComponent  implements OnInit, OnDestroy {
   private unsubscribe$: Subject<void> = new Subject<void>();
+  @Input() isTrackerMode: boolean  = false;
   @Input() id: number | undefined;
   selectedTrip: TripModel = {} as TripModel;
   @Input() isOpen: boolean = false;
@@ -34,7 +35,7 @@ export class SelectedTripComponent  implements OnInit, OnDestroy {
   userPermission = UserPermissionsTrip;
   bookedtrip: BookedTripModel = { bookedSeats: [], id: 0, requestedSeats: 1, tripId: 0 };
   countOfBookedSeats: number = this.requestedSeats ?? 1;
-  tabSelected = 1;
+  @Input() tabSelected = 1;
   carType = CarType;
   distance: number = 0;
   time: string = "";
@@ -78,6 +79,7 @@ export class SelectedTripComponent  implements OnInit, OnDestroy {
   cancel() {
     this.selectedTripModalService._modalOpened.next(false);
     this.isOpen = false;
+    this.tabSelected = this.isTrackerMode ? 3 : 1;
   }
 
   onRangeChange(ev: Event): void {

@@ -5,14 +5,15 @@
     <ion-router-outlet></ion-router-outlet>
     <ion-tabs>
     <ion-tab-bar slot="bottom">
-      <ion-tab-button tab="search">
+      <ion-tab-button tab="home">
         <fa-icon icon="magnifying-glass" class="item_icon"></fa-icon>
         Search
       </ion-tab-button>
       <ion-tab-button tab="current">
-        <fa-icon icon="car-side" class="item_icon"></fa-icon>
-        Activity
-        </ion-tab-button>
+        <ion-fab-button>
+          <fa-icon icon="car-side" class="item_icon"></fa-icon>
+        </ion-fab-button>
+      </ion-tab-button>
       <ion-tab-button tab="profile">
         <fa-icon icon="user" class="item_icon"></fa-icon>
         Profile

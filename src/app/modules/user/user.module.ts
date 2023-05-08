@@ -27,6 +27,12 @@ import {
   PlaceSuggestionBackGroundComponent
 } from "../shared/background-pages/place-suggestion-back-ground/place-suggestion-back-ground.component";
 import {SmallMapComponent} from "../shared/background-pages/small-map/small-map.component";
+import {ProfileComponent} from "./profile/profile.component";
+import {UserTripsListComponent} from "./profile/user-trips-list/user-trips-list.component";
+import {BookedTripsListComponent} from "./profile/booked-trips-list/booked-trips-list.component";
+import {CurrentTripsComponent} from "./current-trips/current-trips.component";
+import {BookedCurrentTripsComponent} from "./current-trips/booked-current-trips/booked-current-trips.component";
+import {MyCurrentTripsComponent} from "./current-trips/my-current-trips/my-current-trips.component";
 @NgModule({
   declarations: [
     UserPage,
@@ -37,7 +43,13 @@ import {SmallMapComponent} from "../shared/background-pages/small-map/small-map.
     SelectedTripComponent,
     BackGroundPage,
     PlaceSuggestionBackGroundComponent,
-    SmallMapComponent
+    SmallMapComponent,
+    ProfileComponent,
+    UserTripsListComponent,
+    BookedTripsListComponent,
+    CurrentTripsComponent,
+    BookedCurrentTripsComponent,
+    MyCurrentTripsComponent
   ],
   imports: [
     CommonModule,

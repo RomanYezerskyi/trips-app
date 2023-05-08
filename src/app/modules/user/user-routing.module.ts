@@ -4,6 +4,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { UserPage } from './user.page';
 import {HomeComponent} from "./home/home.component";
 import {TripsListComponent} from "./trips-list/trips-list.component";
+import {ProfileComponent} from "./profile/profile.component";
+import {CurrentTripsComponent} from "./current-trips/current-trips.component";
 
 
 const routes: Routes = [
@@ -16,8 +18,20 @@ const routes: Routes = [
         component: HomeComponent
       },
       {
+        path: 'home',
+        component: HomeComponent
+      },
+      {
         path: 'search',
         component: TripsListComponent
+      },
+      {
+        path: 'profile',
+        component: ProfileComponent
+      },
+      {
+        path: 'current',
+        component: CurrentTripsComponent
       },
     ]
   },

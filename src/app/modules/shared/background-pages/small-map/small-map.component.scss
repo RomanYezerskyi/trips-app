@@ -18,3 +18,19 @@
 ul {
   text-align: center;
 }
+
+.toggles {
+  background-color: white;
+  border-radius: 5px;
+  width: 100%;
+  margin-bottom: 8px;
+
+  .item_icon{
+    color: #428cff;
+    font-size: 20px;
+  }
+
+  p{
+    margin: 2px;
+  }
+}

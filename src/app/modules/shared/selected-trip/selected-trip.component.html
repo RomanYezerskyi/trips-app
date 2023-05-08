@@ -12,7 +12,7 @@
             </ion-segment-button>
             <ion-segment-button value="2" (click)="changeTab(2)">
               <ion-label>
-                <fa-icon [icon]="selectedTrip.car.carType === carType.Sedan ? 'car' : 'bus'" class="item_icon"></fa-icon>
+                <fa-icon [icon]="selectedTrip?.car?.carType === carType.Sedan ? 'car' : 'bus'" class="item_icon"></fa-icon>
                 <p>Details</p>
               </ion-label>
             </ion-segment-button>
@@ -32,7 +32,7 @@
       </ion-toolbar>
     </ion-header>
     <ion-content class="ion-padding modal-back">
-      <app-small-map *ngIf="tabSelected === 3"></app-small-map>
+      <app-small-map [isTrackerMode]="isTrackerMode" *ngIf="tabSelected === 3"></app-small-map>
       <div class="container" *ngIf="tabSelected === 1">
         <div class="search_info">
           <div class="date">
@@ -139,10 +139,10 @@
           </div>
         </div>
         <!-- booking seats for a buses -->
-        <div class="booking-seats-range" *ngIf="selectedTrip.car.carType === carType.Bus">
+        <div class="booking-seats-range" *ngIf="selectedTrip.car.carType === carType.Bus && !isTrackerMode">
           <p>The selected number of seats: {{requestedSeats}}</p>
         </div>
-        <div class="box" *ngIf="selectedTrip.car.carType === carType.Bus">
+        <div class="box" *ngIf="selectedTrip.car.carType === carType.Bus && !isTrackerMode">
           <div class="seats">
             <div class="wheel">
               <img src="../../../../assets/wheel.png" class="img__wheel" alt="">
@@ -165,18 +165,18 @@
         </div>
 
         <!-- booking seats for a sedans -->
-        <div class="booking-seats-range" *ngIf="selectedTrip.car.carType === carType.Sedan">
+        <div class="booking-seats-range" *ngIf="selectedTrip?.car?.carType === carType.Sedan && !isTrackerMode">
           <p>The selected number of seats: {{countOfBookedSeats}}</p>
           <ion-range aria-label="Range with pin" (ionChange)="onRangeChange($event)" [value]="countOfBookedSeats" [ticks]="true" step="1" min="1" [max]="getAvailableSeatsCount()" [pin]="true" [pinFormatter]="pinFormatter">
           </ion-range>
         </div>
 
-        <div class="booking-price" *ngIf="selectedTrip.car.carType === carType.Sedan">
+        <div class="booking-price" *ngIf="selectedTrip?.car?.carType === carType.Sedan">
           <fa-icon icon="money-bill" class="item_icon"></fa-icon>
           <p>Price: {{selectedTrip.pricePerSeat * countOfBookedSeats | currency:"UAH":"symbol"}}</p>
         </div>
 
-        <div class="actions">
+        <div class="actions" *ngIf="!isTrackerMode">
           <ion-button id="present-alert">Confirm booking</ion-button>
           <ion-alert
             trigger="present-alert"

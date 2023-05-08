@@ -1,5 +1,5 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {Subject} from "rxjs";
+import {Subject, switchMap, switchMapTo, takeUntil, timer} from "rxjs";
 import {PlaceSuggestionModel} from "../../../../core/models/maps-models/place-suggestion-model";
 import * as L from "leaflet";
 import 'leaflet-routing-machine';
@@ -15,12 +15,20 @@ import {SelectedTripModalService} from "../../../../core/services/trip-service/s
 export class SmallMapComponent  implements OnInit, OnDestroy {
   private unsubscribe$: Subject<void> = new Subject<void>();
   @Input() place: PlaceSuggestionModel = {} as PlaceSuggestionModel;
+  @Input() isTrackerMode: boolean  = false;
   private map!: L.Map;
   private marker!: L.Marker
+  private userMarker!: L.Marker
   private myIcon = L.icon({
     iconUrl: `${environment.geoapifyMarkerPoin}${environment.geoapifyFirstApiKey}`,
     iconSize: [24, 40],
   });
+
+  private userIcon = L.icon({
+    iconUrl: `${environment.geoapifyMarkerUser}${environment.geoapifyFirstApiKey}`,
+    iconSize: [24, 40],
+  });
+  showUserPosition: boolean = false;
 
   constructor(
     private mapsBackgroundService: BackGroundMapService,
@@ -41,7 +49,7 @@ export class SmallMapComponent  implements OnInit, OnDestroy {
     iconUrl: "https://unpkg.com/leaflet@1.5.1/dist/images/marker-icon.png"
   });
   private createMap(): void {
-    this.mapsBackgroundService._buildRouteMap.subscribe((value) => {
+    this.mapsBackgroundService._buildRouteMap.pipe(takeUntil(this.unsubscribe$)).subscribe((value) => {
       if (value.buildMap) {
         setTimeout(() => {
           this.map = this.mapsBackgroundService.buildMap(
@@ -65,39 +73,48 @@ export class SmallMapComponent  implements OnInit, OnDestroy {
               value.toLat,
               value.toLon,
               this.map);
-
-            // this.mapsBackgroundService.addMapMarkers(
-            //   value.fromLat ? value.fromLat : this.defaultPlace.lat,
-            //   value.formLon ? value.formLon : this.defaultPlace.lon,
-            //   this.map,
-            //   this.marker,
-            //   this.myIcon
-            // );
-            //
-            // this.mapsBackgroundService.addMapMarkers(
-            //   value.toLat ? value.toLat : this.defaultPlace.lat,
-            //   value.toLon ? value.toLon : this.defaultPlace.lon,
-            //   this.map,
-            //   this.marker,
-            //   this.myIcon
-            // );
-
-            // L.Routing.control({
-            //   waypoints: [
-            //     L.latLng(40.5663651,-75.6032277),
-            //     L.latLng(40.00195, -76.073299),
-            //     L.latLng(42.3673945,-83.0750408)
-            //   ]
-            // }).addTo(this.map);
-
           }
         }, 300);
       }
-    } )
+    });
+  }
+
+  userPositionToggle(){
+    this.mapsBackgroundService.getCurrentPosition().then((value) => {
+      if(!this.userMarker && !this.showUserPosition) {
+        this.userMarker = this.mapsBackgroundService.addMapMarker(
+          value.coords.latitude,
+          value.coords.longitude,
+          this.map,
+          this.userMarker,
+          this.userIcon
+        )
+        this.showUserPosition = !this.showUserPosition;
+        this.refreshUserMarker();
+      } else {
+        this.showUserPosition = !this.showUserPosition;
+        this.refreshUserMarker();
+      }
+    });
+  }
+
+  refreshUserMarker(): void {
+    timer(0, 5000).pipe(takeUntil(this.unsubscribe$), switchMap(() => {
+      return this.mapsBackgroundService.getCurrentPosition().then((value) => {
+        if(this.showUserPosition) {
+          this.mapsBackgroundService.updateMapMarker(
+            value.coords.latitude,
+            value.coords.longitude,
+            this.map,
+            this.userMarker,
+            this.userIcon);
+        }
+      });
+    })).subscribe();
   }
 
   private changeMarkerPosition(): void {
-    this.mapsBackgroundService._changeMarkerPositionSuggestionBackGroundMap.subscribe((value) => {
+    this.mapsBackgroundService._changeMarkerPositionSuggestionBackGroundMap.pipe(takeUntil(this.unsubscribe$)).subscribe((value) => {
       if (value.buildMap) {
         this.mapsBackgroundService.addMapMarker(
           value.lat ? value.lat : this.defaultPlace.lat,
