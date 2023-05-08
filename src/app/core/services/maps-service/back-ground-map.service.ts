@@ -73,7 +73,7 @@ export class BackGroundMapService {
     } )
   }
 
-  public addMapMarker(lat: number, lon: number, map: L.Map, marker: L.Marker, icon: L.Icon<L.IconOptions>): L.Marker {
+  public addMapMarker(lat: number, lon: number, map: L.Map, marker?: L.Marker, icon?: L.Icon<L.IconOptions>): L.Marker {
     map.panTo(new L.LatLng(lat, lon));
     // map.eachLayer((layer) => {
     //   if (layer instanceof L.Marker) map.removeLayer(marker);
@@ -84,6 +84,10 @@ export class BackGroundMapService {
 
   public updateMapMarker(lat: number, lon: number, map: L.Map, marker: L.Marker, icon: L.Icon<L.IconOptions>) {
     marker.setLatLng([lat, lon]);
+  }
+
+  public removeMapMarker(map: L.Map, marker: L.Marker) {
+    map.removeLayer(marker);
   }
 
   public getCurrentPosition = async () => {

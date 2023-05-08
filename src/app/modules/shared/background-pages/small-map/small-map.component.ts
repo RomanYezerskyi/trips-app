@@ -18,7 +18,7 @@ export class SmallMapComponent  implements OnInit, OnDestroy {
   @Input() isTrackerMode: boolean  = false;
   private map!: L.Map;
   private marker!: L.Marker
-  private userMarker!: L.Marker
+  private userMarker: L.Marker | undefined
   private myIcon = L.icon({
     iconUrl: `${environment.geoapifyMarkerPoin}${environment.geoapifyFirstApiKey}`,
     iconSize: [24, 40],
@@ -36,6 +36,7 @@ export class SmallMapComponent  implements OnInit, OnDestroy {
   ngOnInit() {
     this.createMap();
     this.changeMarkerPosition();
+    this.refreshUserMarker();
   }
 
   ngOnDestroy(): void {
@@ -81,7 +82,7 @@ export class SmallMapComponent  implements OnInit, OnDestroy {
 
   userPositionToggle(){
     this.mapsBackgroundService.getCurrentPosition().then((value) => {
-      if(!this.userMarker && !this.showUserPosition) {
+      if (!this.userMarker && !this.showUserPosition) {
         this.userMarker = this.mapsBackgroundService.addMapMarker(
           value.coords.latitude,
           value.coords.longitude,
@@ -90,10 +91,13 @@ export class SmallMapComponent  implements OnInit, OnDestroy {
           this.userIcon
         )
         this.showUserPosition = !this.showUserPosition;
-        this.refreshUserMarker();
       } else {
         this.showUserPosition = !this.showUserPosition;
-        this.refreshUserMarker();
+      }
+
+      if (!this.showUserPosition && this.userMarker) {
+        this.mapsBackgroundService.removeMapMarker(this.map, this.userMarker);
+        this.userMarker = undefined;
       }
     });
   }
@@ -101,7 +105,7 @@ export class SmallMapComponent  implements OnInit, OnDestroy {
   refreshUserMarker(): void {
     timer(0, 5000).pipe(takeUntil(this.unsubscribe$), switchMap(() => {
       return this.mapsBackgroundService.getCurrentPosition().then((value) => {
-        if(this.showUserPosition) {
+        if(this.showUserPosition && this.userMarker) {
           this.mapsBackgroundService.updateMapMarker(
             value.coords.latitude,
             value.coords.longitude,
