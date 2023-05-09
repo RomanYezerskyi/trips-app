@@ -16,6 +16,8 @@ export const environment = {
   geoapifyMarkerPoin: 'https://api.geoapify.com/v1/icon/?type=material&color=red&icon=point&iconType=awesome&apiKey=',
   geoapifyTileLayer: 'https://maps.geoapify.com/v1/tile/osm-bright/{z}/{x}/{y}.png?apiKey=',
 
+  geoapifyMarkerUser: 'https://api.geoapify.com/v1/icon?size=xx-large&type=awesome&color=%233e9cfe&icon=user&apiKey=',
+
   //chat hub
   chatHubConnectionUrl: 'https://localhost:6001/chatHub',
   chatHubMethod: 'JoinToChatMessagesNotifications',
@@ -25,4 +27,9 @@ export const environment = {
   notificationsHubConnectionUrl: 'https://localhost:6001/notify',
   notificationsHubMethod: 'JoinToNotificationsHub',
   notificationsHubHandlerMethod: 'BroadcastNotification',
+
+  // maps hub
+  mapHubConnectionUrl: 'https://localhost:6001/mapHub',
+  mapHubMethod: 'JoinToMapHub',
+  mapHubHandlerMethod: 'BroadcastLocation',
 };

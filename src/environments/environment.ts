@@ -31,6 +31,11 @@ export const environment = {
   notificationsHubConnectionUrl: 'https://localhost:6001/notify',
   notificationsHubMethod: 'JoinToNotificationsHub',
   notificationsHubHandlerMethod: 'BroadcastNotification',
+
+  // maps hub
+  mapHubConnectionUrl: 'https://localhost:6001/mapHub',
+  mapHubMethod: 'JoinToMapHub',
+  mapHubHandlerMethod: 'BroadcastLocation',
 };
 
 /*
