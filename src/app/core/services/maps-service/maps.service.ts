@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { TripModel } from 'src/app/core/models/trip-models/trip-model';
 import { GeocodingFeatureProperties } from 'src/app/core/models/maps-models/place-suggestion-model';
 import { environment } from 'src/environments/environment';
+import {TripsResponseModel} from "../../models/trip-models/trips-response-model";
+import {IUserLocationModel} from "../../models/maps-models/user-location-model";
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +14,7 @@ export class MapsService {
   private geoapifyApiUrl = environment.geoapifyApiUrl;
   private geoapifyFirstApiKey = environment.geoapifyFirstApiKey;
   private geoapifySecondApiKey = environment.geoapifySecondApiKey;
+  private baseApiUrl = environment.baseApiUrl;
   constructor(private http: HttpClient) { }
 
   getPlaceName(text: string): Observable<any> {
@@ -44,5 +47,10 @@ export class MapsService {
     fullAddress += properties.state ? `, ${properties.state}` : '';
     fullAddress += (properties.country && properties.country !== properties.name) ? `, ${properties.country}` : '';
     return fullAddress;
+  }
+
+  sendLocation(location: IUserLocationModel): Observable<TripsResponseModel> {
+    const url = this.baseApiUrl + 'Maps/user-location';
+    return this.http.put<any>(url, location);
   }
 }

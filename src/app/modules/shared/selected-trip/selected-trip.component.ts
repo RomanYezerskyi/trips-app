@@ -39,6 +39,7 @@ export class SelectedTripComponent  implements OnInit, OnDestroy {
   carType = CarType;
   distance: number = 0;
   time: string = "";
+  @Input() isDriver: boolean = false;
   constructor(
     private route: ActivatedRoute,
     private router: Router,

@@ -1,1 +1,29 @@
-<app-booked-current-trips></app-booked-current-trips>
+<div class="">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>
+        <ion-segment value="default">
+          <ion-segment-button value="1" (click)="changeTab(1)">
+            <ion-label>
+              <fa-icon icon="location-dot" class="item_icon"></fa-icon>
+              <p>My</p>
+            </ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2" (click)="changeTab(2)">
+            <ion-label>
+              <fa-icon icon="map-location" class="item_icon"></fa-icon>
+              <p>Booked</p>
+            </ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="" *ngIf="tabSelected === 1">
+    <app-my-current-trips></app-my-current-trips>
+  </div>
+  <div class="" *ngIf="tabSelected === 2">
+    <app-booked-current-trips></app-booked-current-trips>
+  </div>
+</div>

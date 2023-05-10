@@ -1,3 +1,45 @@
-<p>
-  my-current-trips works!
-</p>
+<div class="content">
+  <!--  <div class="no-content" *ngIf="!isTrips && trips.trips.length === 0">-->
+  <!--    <img src="../../../../assets/traveler.png" alt="">-->
+  <!--    <h3>There are no trips yet :)</h3>-->
+  <!--  </div>-->
+  <div class="container" *ngIf="trips.trips.length !== 0">
+    <div class="items">
+      <div class="search_item" *ngFor="let trip of trips.trips" (click)="navigateToTripPage(trip.id)">
+        <div class="header">
+          <div class="time">
+            <p>{{trip.startTime | date:'MMM d, y, h:mm a'}}</p>
+            <p>{{trip.endTime | date:'MMM d, y, h:mm a'}}</p>
+          </div>
+          <div class="line">
+          </div>
+          <div class="price_item">
+            <div class="cities">
+              <div class="start">
+                <fa-icon icon="location" class="item_icon"></fa-icon>
+                <p>{{trip.startPlace}}</p>
+              </div>
+              <div class="destination">
+                <fa-icon icon="location-dot" class="item_icon"></fa-icon>
+                <p>{{trip.endPlace}}</p>
+              </div>
+            </div>
+            <div class="price">
+              <p>{{trip.pricePerSeat | currency:"UAH":"symbol"}}</p>
+              <fa-icon [icon]="trip?.car?.carType === carType?.Sedan ? 'car' : 'bus'" class="item_icon"></fa-icon>
+            </div>
+          </div>
+        </div>
+        <div class="body">
+          <div class="profile_img">
+            <img [src]="sanitizeUserImg(trip.user?.userImg!)" class="img" alt="">
+          </div>
+          <p class="user_name">{{trip.user?.firstName}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-selected-trip [isDriver]="true" [tabSelected]="3" [isTrackerMode]="true" [id]="selectedTripId"></app-selected-trip>
+
+</div>

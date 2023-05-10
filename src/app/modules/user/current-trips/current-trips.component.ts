@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-current-trips',
@@ -6,9 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./current-trips.component.scss'],
 })
 export class CurrentTripsComponent  implements OnInit {
-
+  @Input() tabSelected = 1;
   constructor() { }
 
   ngOnInit() {}
+  changeTab(tab: number): void{
+    this.tabSelected = tab;
+  }
 
 }

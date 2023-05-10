@@ -50,6 +50,10 @@ export class TripService {
     const url = this.baseApiUrl + 'Trips/user-trips';
     return this.http.get<UserTripsResponseModel>(url, { params: { take: take, skip: skip } })
   }
+  getUserStartedTrips(take: number, skip: number): Observable<TripsResponseModel> {
+    const url = this.baseApiUrl + 'Trips/started';
+    return this.http.get<TripsResponseModel>(url, { params: { take: take, skip: skip } });
+  }
   getTripById(tripId: number): Observable<TripModel> {
     const url = this.baseApiUrl + 'Trips/'
     return this.http.get<TripModel>(url + tripId);

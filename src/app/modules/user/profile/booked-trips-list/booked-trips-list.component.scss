@@ -13,6 +13,10 @@ ion-label {
 }
 
 .items {
+  padding: 10px;
+  overflow: scroll;
+  height: calc(100vh - 128px);
+
   .search_item {
     font-weight: 600;
     margin-top: 10px;

@@ -1,9 +1,9 @@
 <div class="map-block">
-  <div class="toggles">
+  <div class="toggles" *ngIf="isTrackerMode">
     <ion-toggle [value]="showUserPosition" (click)="userPositionToggle()" >
       <p><fa-icon icon="user" class="item_icon"></fa-icon> Show you</p>
     </ion-toggle>
-    <ion-toggle >
+    <ion-toggle [value]="showDriverPosition" (click)="carPositionToggle()">
       <p> <fa-icon icon="car" class="item_icon"></fa-icon> Show car</p>
       {{" "}}
     </ion-toggle>

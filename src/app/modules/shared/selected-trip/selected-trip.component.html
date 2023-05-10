@@ -32,7 +32,7 @@
       </ion-toolbar>
     </ion-header>
     <ion-content class="ion-padding modal-back">
-      <app-small-map [isTrackerMode]="isTrackerMode" *ngIf="tabSelected === 3"></app-small-map>
+      <app-small-map [isTrackerMode]="isTrackerMode" [isDriver]="true" [tripId]="selectedTrip.id"  *ngIf="tabSelected === 3"></app-small-map>
       <div class="container" *ngIf="tabSelected === 1">
         <div class="search_info">
           <div class="date">
