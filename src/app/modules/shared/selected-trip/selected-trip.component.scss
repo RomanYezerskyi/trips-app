@@ -27,6 +27,16 @@ ion-label{
   }
 }
 
+.container, .wrapper {
+  margin: 10px;
+}
+
+.container-map{
+  margin: 10px auto auto;
+  height: 82vh;
+  width: 97vw;
+}
+
 .container .search_info {
   box-shadow: none;
 }

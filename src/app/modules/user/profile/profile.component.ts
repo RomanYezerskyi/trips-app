@@ -5,6 +5,7 @@ import {Subject, takeUntil} from "rxjs";
 import {HttpErrorResponse} from "@angular/common/http";
 import {SafeUrl} from "@angular/platform-browser";
 import {UserModel} from "../../../core/models/user-models/user-model";
+import {AuthService} from "../../../core/services/auth-service/auth-service.service";
 
 @Component({
   selector: 'app-profile',
@@ -22,11 +23,16 @@ export class ProfileComponent  implements  OnInit, OnDestroy {
 
   constructor(
     private imgSanitaze: ImgSanitizerService,
-    private userService: UserService) {
+    private userService: UserService,
+    private authService: AuthService) {
   }
 
   ngOnInit(): void {
     this.getUser();
+  }
+
+  logOut(): void {
+    this.authService.logOut();
   }
 
   ngOnDestroy(): void {

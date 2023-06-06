@@ -41,7 +41,7 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains: ["localhost:6001", "localhost:5001"],
+        allowedDomains: ["localhost:6001", "localhost:5001", "5332-178-212-241-227.ngrok-free.app", "6808-178-212-241-227.ngrok-free.app"],
         disallowedRoutes: []
       }
     }),

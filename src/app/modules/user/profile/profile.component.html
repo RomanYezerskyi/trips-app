@@ -11,6 +11,9 @@
         <p>{{user.email}}</p>
         <p>{{user.phoneNumber}}</p>
       </div>
+      <div class="logout">
+        <fa-icon icon="right-from-bracket" class="item_icon" (click)="logOut()" ></fa-icon>
+      </div>
     </div>
     <div class="column">
       <app-user-trips-list></app-user-trips-list>

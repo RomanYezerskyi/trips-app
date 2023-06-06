@@ -1,0 +1,40 @@
+.box{
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  z-index: -1;
+  filter: blur(3px);
+
+  img {
+    min-height: 100%;
+  }
+}
+
+.main {
+  padding: 10px;
+  border-radius: 10px;
+  background-color: white;
+  margin: 100px 10px 10px;
+}
+
+.header {
+  text-align: center;
+  h1{
+    background-color: white;
+    display: inline-block;
+    padding: 10px 25px;
+    border-radius: 10px;
+  }
+}
+
+.box{
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  z-index: -1;
+  filter: blur(3px);
+
+  img {
+    min-height: 100%;
+  }
+}

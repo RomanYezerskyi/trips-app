@@ -51,6 +51,6 @@ export class MapsService {
 
   sendLocation(location: IUserLocationModel): Observable<TripsResponseModel> {
     const url = this.baseApiUrl + 'Maps/user-location';
-    return this.http.put<any>(url, location);
+    return this.http.put<any>(url, location, {headers: { "ngrok-skip-browser-warning":"any"}});
   }
 }

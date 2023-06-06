@@ -39,6 +39,7 @@ body.backdrop-no-scroll{
 
 .content {
   //margin-top: 56px;
+  padding: 5px;
 }
 
 .leaflet-routing-collapse-btn {
@@ -55,4 +56,23 @@ body.backdrop-no-scroll{
 
 ion-icon {
   color: black;
+}
+
+.inner-scroll {
+  padding: 0 !important;
+}
+
+.inner-scroll.scroll-y {
+  padding: 0 !important;
+}
+
+.ion-padding {
+  --padding-start: 0;
+  --padding-end: 0;
+  --padding-top: 0;
+  --padding-bottom: 0;
+  padding-inline-start: 0;
+  padding-inline-end: 0;
+  padding-top: 0;
+  padding-bottom: 0;
 }

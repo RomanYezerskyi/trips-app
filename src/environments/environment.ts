@@ -10,8 +10,11 @@ export const environment = {
   resetPasswordUrl: 'http://localhost:4200/auth/resetpassword',
 
   //api
-  baseApiUrl: 'https://localhost:6001/api/',
-  baseIdentityServerUrl: 'https://localhost:5001/api/',
+  // baseApiUrl: 'https://localhost:6001/api/',
+  baseApiUrl: 'https://6808-178-212-241-227.ngrok-free.app/api/',
+
+  // baseIdentityServerUrl: 'https://localhost:5001/api/',
+  baseIdentityServerUrl: 'https://5332-178-212-241-227.ngrok-free.app/api/',
 
   //geoapify
   geoapifyApiUrl: 'https://api.geoapify.com/v1/geocode/',

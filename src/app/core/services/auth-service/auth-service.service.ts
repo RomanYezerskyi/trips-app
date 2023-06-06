@@ -31,7 +31,7 @@ export class AuthService {
     console.log("try refresh " + isRefreshSuccess);
     if (!isRefreshSuccess) {
       this.logOut();
-      this.router.navigate(["auth/login"], { queryParams: { returnUrl: this.redirectUrl } });
+      this.router.navigate(["auth"], { queryParams: { returnUrl: this.redirectUrl } });
     }
     return isRefreshSuccess;
   }

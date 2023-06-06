@@ -45,7 +45,6 @@ export class BackGroundMapService {
     L.tileLayer(`${environment.geoapifyTileLayer}${environment.geoapifyFirstApiKey}`, {
       maxZoom: zoom,
       id: "osm-bright",
-      //attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
   }
 
@@ -75,9 +74,6 @@ export class BackGroundMapService {
 
   public addMapMarker(lat: number, lon: number, map: L.Map, marker?: L.Marker, icon?: L.Icon<L.IconOptions>): L.Marker {
     map.panTo(new L.LatLng(lat, lon));
-    // map.eachLayer((layer) => {
-    //   if (layer instanceof L.Marker) map.removeLayer(marker);
-    // });
     marker = L.marker([lat, lon], { icon: icon }).addTo(map);
     return marker;
   }

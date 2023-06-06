@@ -7,9 +7,12 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
+  <div class="box">
+    <img src="assets/img_1.png" alt="">
+  </div>
   <form [formGroup]="ionicForm" (ngSubmit)="submitForm()" novalidate>
     <ion-item lines="full">
-      <ion-label position="floating">Email</ion-label>
+      <ion-label position="stacked">Email</ion-label>
       <ion-input type="text" formControlName="email" required="true"></ion-input>
     </ion-item>
     <span class="error ion-padding" *ngIf="isSubmitted && errorControl['email']?.errors?.['required']">
@@ -19,7 +22,7 @@
         Please enter valid email.
     </span>
     <ion-item lines="full">
-      <ion-label position="floating">Password</ion-label>
+      <ion-label position="stacked">Password</ion-label>
       <ion-input type="password" formControlName="password"  required="true"></ion-input>
     </ion-item>
     <span class="error ion-padding" *ngIf="isSubmitted && errorControl['password']?.errors?.['required']">
@@ -31,7 +34,7 @@
     <ion-row>
       <ion-col>
         <ion-button type="submit" color="danger" expand="block">Sign In</ion-button>
-        <a [routerLink]="['/forgot-password']" class="small-text">Forgot Password?</a>
+<!--        <a [routerLink]="['/forgot-password']" class="small-text">Forgot Password?</a>-->
       </ion-col>
     </ion-row>
   </form>

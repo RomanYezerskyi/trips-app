@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import * as signalR from '@microsoft/signalr';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { BehaviorSubject, filter, Observable, Subject } from 'rxjs';
 import { SignalEvent } from './signal-event';
@@ -41,7 +42,12 @@ export class SignalRService {
   }
   private _initializeSignalR<TData>() {
     this._hubConnection = new HubConnectionBuilder()
-      .withUrl(this.url)
+      .withUrl(this.url,
+        {
+          headers: { "ngrok-skip-browser-warning": "any"},
+          skipNegotiation: true,
+          transport: signalR.HttpTransportType.WebSockets
+        })
       .build();
     this._hubConnection.start()
       .then(_ => {

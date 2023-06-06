@@ -74,7 +74,6 @@ export class SmallMapComponent  implements OnInit, OnDestroy {
   });
 
   setSignalRUrls(): void {
-    debugger;
     if(this.tripId) {
       this.signal.setConnectionUrl = environment.mapHubConnectionUrl;
       this.signal.setHubMethod = environment.mapHubMethod

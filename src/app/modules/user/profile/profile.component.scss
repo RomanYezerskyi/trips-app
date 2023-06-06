@@ -54,3 +54,12 @@
   color: #428cff;
 }
 
+.logout {
+  position: relative;
+
+  .item_icon {
+    position: absolute;
+    right: 10px;
+    font-size: 20px;
+  }
+}

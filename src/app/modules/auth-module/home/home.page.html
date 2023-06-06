@@ -1,21 +1,18 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Ionic Form
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
 <ion-content class="auth-form">
-  <ion-grid>
-    <ion-row>
-      <ion-col align-self-center>
-        <ion-button [routerLink]="['/auth/register']" expand="block" color="primary">Register</ion-button>
-        <div class="divider line one-line ion-text-center">or</div>
-        <br/>
-        <div class="already ion-text-center">Already a user?</div>
-        <ion-button [routerLink]="['/auth/login']" expand="block" color="danger">Sign In</ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <div class="box">
+    <img src="assets/img_1.png" alt="">
+  </div>
+  <div class="header">
+    <h1>
+      Welcome to trip app!
+    </h1>
+  </div>
+ <div class="main">
+   <ion-button [routerLink]="['/auth/register']" expand="block" color="primary">Register</ion-button>
+   <div class="divider line one-line ion-text-center">or</div>
+   <br/>
+   <div class="already ion-text-center">Already a user?</div>
+   <ion-button [routerLink]="['/auth/login']" expand="block" color="danger">Sign In</ion-button>
+ </div>
 </ion-content>
 

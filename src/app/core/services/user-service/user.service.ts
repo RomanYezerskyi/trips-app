@@ -17,7 +17,7 @@ export class UserService {
   async chekIfUserExist(): Promise<any> {
     const url = this.baseApiUrl + 'User/add-user';
     return await new Promise<any>((resolve, reject) => {
-      this.http.get<any>(url).subscribe({
+      this.http.get<any>(url, {headers: { "ngrok-skip-browser-warning":"any"}}).subscribe({
         next: (res) => resolve(res),
         error: (_) => resolve(_)
       });
@@ -25,20 +25,20 @@ export class UserService {
   }
   searchUsers(userData: string): Observable<UserModel[]> {
     const url = this.baseApiUrl + 'User/users/' + userData;
-    return this.http.get<UserModel[]>(url);
+    return this.http.get<UserModel[]>(url, {headers: { "ngrok-skip-browser-warning":"any"}});
   }
   getUserFromApi(userId: string): Observable<UserModel> {
     const url = this.baseApiUrl + 'User/';
-    return this.http.get<UserModel>(url + userId);
+    return this.http.get<UserModel>(url + userId, {headers: { "ngrok-skip-browser-warning":"any"}});
   }
 
   getCurrentUser(): Observable<UserModel> {
     const url = this.baseApiUrl + 'User';
-    return this.http.get<UserModel>(url);
+    return this.http.get<UserModel>(url, {headers: { "ngrok-skip-browser-warning":"any"}});
   }
   updateUserPassword(newPasswordModel: { userId: string, currentPassword: string, newPassword: string }): Observable<any> {
     const url = this.baseIdentityServerUrl + 'User/update-password'
-    return this.http.post(url, newPasswordModel);
+    return this.http.post(url, newPasswordModel, {headers: { "ngrok-skip-browser-warning":"any"}});
   }
   updateUserInfo(userModel: {
     id: string,
@@ -47,22 +47,22 @@ export class UserService {
     phoneNumber: string
   }): Observable<any> {
     const url = this.baseApiUrl + 'User/update';
-    return this.http.put(url, userModel);
+    return this.http.put(url, userModel, {headers: { "ngrok-skip-browser-warning":"any"}});
   }
   updateUserPhoto(formData: FormData): Observable<any> {
     const url = this.baseApiUrl + 'User/user-profile-image'
-    return this.http.put(url, formData);
+    return this.http.put(url, formData, {headers: { "ngrok-skip-browser-warning":"any"}});
   }
   addDrivingLicense(documents: FormData): Observable<any> {
     const url = this.baseApiUrl + 'User/license';
-    return this.http.post(url, documents)
+    return this.http.post(url, documents, {headers: { "ngrok-skip-browser-warning":"any"}})
   }
   getUserStatistics(): Observable<any> {
     const url = this.baseApiUrl + 'User/statistics';
-    return this.http.get<any>(url);
+    return this.http.get<any>(url, {headers: { "ngrok-skip-browser-warning":"any"}});
   }
   getUserDrivingDocuments(): Observable<UserDocumentsModel[]> {
     const url = this.baseApiUrl + 'User/documents';
-    return this.http.get<UserDocumentsModel[]>(url);
+    return this.http.get<UserDocumentsModel[]>(url, {headers: { "ngrok-skip-browser-warning":"any"}});
   }
 }
